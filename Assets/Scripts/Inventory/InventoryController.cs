@@ -37,10 +37,11 @@ public class InventoryController : MonoBehaviour
     private void InitializeDefaultInventories()
     {
         // Initialize player inventory
-        _inventories["player:0"] = new Inventory();
+        _inventories["player:0"] = new Inventory { id = "player:0" };
+        
 
         // Initialize NPC inventory
-        _inventories["npc:0"] = new Inventory();
+        _inventories["npc:0"] = new Inventory { id = "npc:0" };
 
         Debug.Log("Default inventories initialized for player and NPC.");
     }
@@ -60,9 +61,9 @@ public class InventoryController : MonoBehaviour
 
     public Inventory GetInventory(string id)
     {
-        if (_inventories.ContainsKey(id))
+        if (_inventories.TryGetValue(id, out var inventory))
         {
-            return _inventories[id];
+            return inventory;
         }
         else
         {
@@ -73,9 +74,9 @@ public class InventoryController : MonoBehaviour
 
     public void AddItem(string inventoryId, Item item)
     {
-        if (_inventories.ContainsKey(inventoryId))
+        if (_inventories.TryGetValue(inventoryId, out var inventory))
         {
-            _inventories[inventoryId].items.Add(item);
+            inventory.items.Add(item);
             Debug.Log($"Added {item.name} to inventory {inventoryId}.");
         }
         else

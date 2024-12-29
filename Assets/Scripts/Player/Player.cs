@@ -12,14 +12,40 @@ public class Player : MonoBehaviour
    
 
     private void Start()
-    {  
-        inventory = InventoryController.Instance.GetInventory("player:0");
-        if(inventory== null) Debug.LogError("Inventory loading failed!");
-        InventoryController.Instance.AddBasicArmorMock(inventory.id);
-        stats = StatsController.Instance.GetStats("0");
-        StatsController.Instance.AttachBasicObservers(stats,FindFirstObjectByType<UIHealth>(),FindFirstObjectByType<UIEnergy>());
-        SetState(new AliveState());
+    {
+        try
+        {
+            inventory = InventoryController.Instance.GetInventory("player:0");
+            if (inventory == null)
+            {
+                throw new Exception("Inventory loading failed!");
+            }
+        
+            InventoryController.Instance.AddBasicArmorMock(inventory.id);
+
+            stats = StatsController.Instance.GetStats("0");
+            if (stats == null)
+            {
+                throw new Exception("Stats loading failed!");
+            }
+
+            var healthUI = FindFirstObjectByType<UIHealth>();
+            var energyUI = FindFirstObjectByType<UIEnergy>();
+        
+            if (healthUI == null || energyUI == null)
+            {
+                throw new Exception("UI components not found!");
+            }
+
+            StatsController.Instance.AttachBasicObservers(stats, healthUI, energyUI);
+            SetState(new AliveState());
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"An error occurred in Start: {ex.Message}");
+        }
     }
+
     
     public void SetState(PlayerState state)
     {
