@@ -2,9 +2,9 @@ namespace Quest
 {
     public class EliminateQuestFactory : IQuestFactory
     {
-        public IQuest CreateQuest()
+        public IQuest CreateQuest(string name, string description)
         {
-            return new EliminateQuest();
+            return new EliminateQuest(name, description);
         }
     }
 }

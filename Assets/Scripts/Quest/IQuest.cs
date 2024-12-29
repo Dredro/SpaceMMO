@@ -2,11 +2,11 @@ namespace Quest
 {
     public interface IQuest
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
+        string Name { get; set; }
+        string Description { get; set; }
+        bool IsCompleted { get; set; }
 
-        public void Finish();
-        public void Cancel();
-
+        void Complete();
+        void Cancel();
     }
 }

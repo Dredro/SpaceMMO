@@ -1,17 +1,30 @@
+using UnityEngine;
+
 namespace Quest
 {
     public class EliminateQuest : IQuest
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public void Finish()
+        public bool IsCompleted { get; set; }
+
+        public EliminateQuest(string name, string description)
         {
-            
+            Name = name;
+            Description = description;
+            IsCompleted = false;
+        }
+
+        public void Complete()
+        {
+            IsCompleted = true;
+            Debug.Log($"{Name} completed successfully.");
         }
 
         public void Cancel()
         {
-  
+            IsCompleted = false;
+            Debug.Log($"{Name} has been canceled.");
         }
     }
 }

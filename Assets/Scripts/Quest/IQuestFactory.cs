@@ -2,6 +2,7 @@ namespace Quest
 {
     public interface IQuestFactory
     {
-        public IQuest CreateQuest();
+        IQuest CreateQuest(string name, string description);
     }
+
 }
