@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {  
-        inventory = InventoryController.Instance.GetInventory();
+        inventory = InventoryController.Instance.GetInventory("0");
         stats = StatsController.Instance.GetStats("0");
         StatsController.Instance.AttachBasicObservers(stats,FindFirstObjectByType<UIHealth>(),FindFirstObjectByType<UIEnergy>());
         SetState(new AliveState());
