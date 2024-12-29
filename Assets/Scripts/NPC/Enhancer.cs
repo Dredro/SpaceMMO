@@ -10,19 +10,20 @@ namespace NPC
             Debug.Log($"Welcome!");
         }
 
-        public void DecorateArmorWithFireResistance(Armor armor)
+        public Armor DecorateArmorWithFireResistance(Armor armor)
         {
-            if (armor != null)
+            if (armor != null && armor is not FireResistanceDecorator)
             {
                 var fireResistantArmor = ScriptableObject.CreateInstance<FireResistanceDecorator>();
 
                 fireResistantArmor.Init(armor);
                 fireResistantArmor.ApplyFireResistance();
 
-                armor = fireResistantArmor;
-
                 Debug.Log($"Added fire resistance to {armor.name}. New item: {fireResistantArmor.name}");
+                return fireResistantArmor;
             }
+
+            return null;
         }
     }
 }
