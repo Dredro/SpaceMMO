@@ -1,4 +1,5 @@
 using System;
+using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,16 +7,19 @@ public class Player : MonoBehaviour
 {
     [SerializeField] public string id;
     public Stats stats;
-    private PlayerState currentState;
     public Inventory inventory;
+    private PlayerState currentState;
+   
 
-    private void Awake()
-    {
-        id = PlayerDbController.GetInstance().GetPlayer().ToString();
-        inventory = InventoryController.GetInstance().GetInventory(id);
-        stats = StatsController.GetInstance().GetStats(id);
+    private void Start()
+    {  
+        inventory = InventoryController.Instance.GetInventory();
+        stats = StatsController.Instance.GetStats("0");
+        StatsController.Instance.AttachBasicObservers(stats,FindFirstObjectByType<UIHealth>(),FindFirstObjectByType<UIEnergy>());
         SetState(new AliveState());
     }
+    
+
 
     public void SetState(PlayerState state)
     {
