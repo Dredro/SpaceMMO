@@ -1,8 +1,11 @@
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "New ArmorDecorator", menuName = "Inventory/Armor/Decorator")]
 public abstract class ArmorDecorator : Armor
 {
-    protected Armor baseArmor;
+    [SerializeField] protected Armor baseArmor;
 
-    public ArmorDecorator(Armor baseArmor)
+    public void Init(Armor baseArmor)
     {
         this.baseArmor = baseArmor;
 

@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor;
+using System.Runtime.CompilerServices;
+using Unity.Collections;
 using UnityEngine;
 
 [Serializable]
 public class Inventory
 {
-    [SerializeField] public string id;
-    [SerializeField] public List<Item> items;
+    public string id;
+    public List<Item> items = new List<Item>();
 }

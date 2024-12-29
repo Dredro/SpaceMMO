@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class InventoryController : MonoBehaviour
@@ -31,8 +32,22 @@ public class InventoryController : MonoBehaviour
         _instance = this;
     }
 
+    private void AddBasicArmorMock()
+    {
+        var item = ScriptableObject.CreateInstance<BaseArmor>();
+
+        item.defenseValue = 100;
+        item.id = GUID.Generate().ToString();
+        item.name = "Base Armor";
+        item.value = 10;
+        item.weight = 1000;
+
+        AddItem(_inventory, item);
+    }
+
     public Inventory GetInventory(string id)
     {
+        AddBasicArmorMock();
         return _inventory;
     }
 
@@ -60,9 +75,14 @@ public class InventoryController : MonoBehaviour
         var armor = _inventory.items.Find(item => item is Armor && item.id == armorId) as Armor;
         if (armor != null)
         {
-            var fireResistantArmor = new FireResistanceDecorator(armor);
+            var fireResistantArmor = ScriptableObject.CreateInstance<FireResistanceDecorator>();
+            
+            fireResistantArmor.Init(armor);
+            fireResistantArmor.ApplyFireResistance();
+            
             _inventory.items.Remove(armor);
             _inventory.items.Add(fireResistantArmor);
+
             Debug.Log($"Added fire resistance to {armor.name}. New item: {fireResistantArmor.name}");
         }
         else
@@ -70,6 +90,7 @@ public class InventoryController : MonoBehaviour
             Debug.Log($"Armor with ID {armorId} not found.");
         }
     }
+
 
     public void PrintInventory(Inventory inventory)
     {

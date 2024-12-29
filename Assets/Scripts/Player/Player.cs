@@ -19,8 +19,6 @@ public class Player : MonoBehaviour
         SetState(new AliveState());
     }
     
-
-
     public void SetState(PlayerState state)
     {
         currentState = state;

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public abstract class Item
+public abstract class Item : ScriptableObject
 {
     [SerializeField] public string id;
     [SerializeField] public string name;
