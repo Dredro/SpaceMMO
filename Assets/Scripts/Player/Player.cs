@@ -13,7 +13,9 @@ public class Player : MonoBehaviour
 
     private void Start()
     {  
-        inventory = InventoryController.Instance.GetInventory("0");
+        inventory = InventoryController.Instance.GetInventory("player:0");
+        if(inventory== null) Debug.LogError("Inventory loading failed!");
+        InventoryController.Instance.AddBasicArmorMock(inventory.id);
         stats = StatsController.Instance.GetStats("0");
         StatsController.Instance.AttachBasicObservers(stats,FindFirstObjectByType<UIHealth>(),FindFirstObjectByType<UIEnergy>());
         SetState(new AliveState());

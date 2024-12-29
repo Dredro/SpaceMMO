@@ -18,7 +18,7 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    private Inventory _inventory = new Inventory();
+    private readonly Dictionary<string, Inventory> _inventories = new Dictionary<string, Inventory>();
 
     private void Awake()
     {
@@ -30,9 +30,22 @@ public class InventoryController : MonoBehaviour
         }
 
         _instance = this;
+
+        InitializeDefaultInventories();
     }
 
-    private void AddBasicArmorMock()
+    private void InitializeDefaultInventories()
+    {
+        // Initialize player inventory
+        _inventories["player:0"] = new Inventory();
+
+        // Initialize NPC inventory
+        _inventories["npc:0"] = new Inventory();
+
+        Debug.Log("Default inventories initialized for player and NPC.");
+    }
+
+    public void AddBasicArmorMock(string inventoryId)
     {
         var item = ScriptableObject.CreateInstance<BaseArmor>();
 
@@ -42,62 +55,69 @@ public class InventoryController : MonoBehaviour
         item.value = 10;
         item.weight = 1000;
 
-        AddItem(_inventory, item);
+        AddItem(inventoryId, item);
     }
 
     public Inventory GetInventory(string id)
     {
-        AddBasicArmorMock();
-        return _inventory;
-    }
-
-    public void AddItem(Inventory inventory,Item item)
-    {
-        inventory.items.Add(item);
-        Debug.Log($"Added {item.name} to inventory.");
-    }
-
-    public void RemoveItem(Inventory inventory,Item item)
-    {
-        if (_inventory.items.Contains(item))
+        if (_inventories.ContainsKey(id))
         {
-            _inventory.items.Remove(item);
-            Debug.Log($"Removed {item.name} from inventory.");
+            return _inventories[id];
         }
         else
         {
-            Debug.Log($"Item {item.name} not found in inventory.");
+            Debug.LogError($"Inventory with ID {id} not found.");
+            return null;
         }
     }
 
-    public void DecorateArmorWithFireResistance(string armorId)
+    public void AddItem(string inventoryId, Item item)
     {
-        var armor = _inventory.items.Find(item => item is Armor && item.id == armorId) as Armor;
-        if (armor != null)
+        if (_inventories.ContainsKey(inventoryId))
         {
-            var fireResistantArmor = ScriptableObject.CreateInstance<FireResistanceDecorator>();
-            
-            fireResistantArmor.Init(armor);
-            fireResistantArmor.ApplyFireResistance();
-            
-            _inventory.items.Remove(armor);
-            _inventory.items.Add(fireResistantArmor);
-
-            Debug.Log($"Added fire resistance to {armor.name}. New item: {fireResistantArmor.name}");
+            _inventories[inventoryId].items.Add(item);
+            Debug.Log($"Added {item.name} to inventory {inventoryId}.");
         }
         else
         {
-            Debug.Log($"Armor with ID {armorId} not found.");
+            Debug.LogError($"Inventory with ID {inventoryId} not found. Cannot add item.");
         }
     }
 
-
-    public void PrintInventory(Inventory inventory)
+    public void RemoveItem(string inventoryId, Item item)
     {
-        Debug.Log("Inventory:");
-        foreach (var item in inventory.items)
+        if (_inventories.ContainsKey(inventoryId))
         {
-            Debug.Log($"- {item.name}");
+            if (_inventories[inventoryId].items.Contains(item))
+            {
+                _inventories[inventoryId].items.Remove(item);
+                Debug.Log($"Removed {item.name} from inventory {inventoryId}.");
+            }
+            else
+            {
+                Debug.Log($"Item {item.name} not found in inventory {inventoryId}.");
+            }
+        }
+        else
+        {
+            Debug.LogError($"Inventory with ID {inventoryId} not found. Cannot remove item.");
+        }
+    }
+    
+
+    public void PrintInventory(string inventoryId)
+    {
+        if (_inventories.ContainsKey(inventoryId))
+        {
+            Debug.Log($"Inventory {inventoryId}:");
+            foreach (var item in _inventories[inventoryId].items)
+            {
+                Debug.Log($"- {item.name}");
+            }
+        }
+        else
+        {
+            Debug.LogError($"Inventory with ID {inventoryId} not found. Cannot print inventory.");
         }
     }
 }
