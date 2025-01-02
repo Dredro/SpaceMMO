@@ -6,9 +6,10 @@ namespace Mob
     {
         public int Damage { get; set; }
 
-        public void ExecuteBehaviour()
+        public void ExecuteBehaviour(MobAI agent)
         {
-            Debug.Log($"AggressiveBehaviour: Attacking with damage {Damage}.");
+            agent.Patrol();
+            agent.DetectAndFollowPlayer();
         }
     }
 }

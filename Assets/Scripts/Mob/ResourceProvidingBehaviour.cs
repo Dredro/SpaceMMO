@@ -6,10 +6,11 @@ namespace Mob
     {
         public Inventory Inventory;
 
-        public void ExecuteBehaviour()
+        
+        public void ExecuteBehaviour(MobAI agent)
         {
-            Inventory = InventoryController.Instance.GetInventory("mob:0");
-            Debug.Log("ResourceProvidingBehaviour: Providing resources from inventory.");
+            Inventory ??= InventoryController.Instance.GetInventory("mob:0");
+            agent.Patrol();
         }
 
         public void Tame()

@@ -7,9 +7,9 @@ namespace Mob
         public int HealAmount { get; set; }
         public Inventory Inventory { get; set; }
 
-        public void ExecuteBehaviour()
+        public void ExecuteBehaviour(MobAI agent)
         {
-            Debug.Log($"SupportingBehaviour: Healing allies by {HealAmount}.");
+            agent.Patrol();
         }
 
         public void Tame()

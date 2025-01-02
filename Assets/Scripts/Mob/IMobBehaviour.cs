@@ -2,6 +2,6 @@ namespace Mob
 {
     public interface IMobBehaviour
     {
-        public void ExecuteBehaviour();
+        public void ExecuteBehaviour(MobAI agent);
     }
 }
