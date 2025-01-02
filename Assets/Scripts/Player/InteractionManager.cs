@@ -1,5 +1,7 @@
 using System;
+using Interactions;
 using NPC;
+using UI.Dialog;
 using UnityEngine;
 
 public class InteractionManager : MonoBehaviour
@@ -13,23 +15,18 @@ public class InteractionManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out NPC.NPC npc))
+        if (other.TryGetComponent(out IInteractor interactor))
         {
-            npc.Talk();
-            if (npc is Enhancer enhancer)
-            {
-                if (player.inventory.items[0] is Armor armor)
-                {
-                   var fireResistance = enhancer.DecorateArmorWithFireResistance(armor);
-                   if (fireResistance != null)
-                   {
-                       player.inventory.items.Remove(armor);
-                       player.inventory.items.Add(fireResistance); // TO FIX
-                   }
-                      
-                }
-                   
-            }
+            var data = new InteractionData(player, "");
+            interactor.OnStartInteract(data);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent(out IInteractor interactor))
+        {
+            var data = new InteractionData(player, "");
+            interactor.OnEndInteract(data);
         }
     }
 }

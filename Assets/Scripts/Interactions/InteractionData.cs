@@ -4,10 +4,10 @@ namespace Interactions
 {
     public struct InteractionData
     {
-        public GameObject Source;
+        public object Source;
         public string Message;
 
-        public InteractionData(GameObject source, string message)
+        public InteractionData(object source, string message)
         {
             Source = source;
             Message = message;

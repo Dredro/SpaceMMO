@@ -20,7 +20,17 @@ namespace UI.Dialog
             body.text = Body;
         }
 
-        public void Show()
+        public void Confirm()
+        {
+            gameObject.SetActive(false);
+        }
+
+        public void Cancel()
+        {
+            gameObject.SetActive(false);
+        }
+
+        public void Show(InteractionData data)
         {
             gameObject.SetActive(true);
         }
@@ -29,15 +39,6 @@ namespace UI.Dialog
         {
             gameObject.SetActive(false);
         }
-
-        public void OnStartInteract(InteractionData data)
-        {
-           Show();
-        }
-
-        public void OnEndInteract(InteractionData data)
-        {
-            Hide(); 
-        }
+        
     }
 }

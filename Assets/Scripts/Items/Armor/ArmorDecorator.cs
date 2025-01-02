@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class ArmorDecorator : Armor
 {
     [SerializeField] protected Armor baseArmor;
-
+    [SerializeField] public Sprite icon;
     public void Init(Armor baseArmor)
     {
         this.baseArmor = baseArmor;

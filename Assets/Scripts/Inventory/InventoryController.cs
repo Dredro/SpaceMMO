@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 public class InventoryController : MonoBehaviour
 {
     private static InventoryController _instance;
-
+    public static event Action<string, Item> OnItemAdded;
     public static InventoryController Instance
     {
         get
@@ -71,13 +72,20 @@ public class InventoryController : MonoBehaviour
             return null;
         }
     }
-
+    
     public void AddItem(string inventoryId, Item item)
     {
         if (_inventories.TryGetValue(inventoryId, out var inventory))
         {
+            if (inventory.items.Count >= inventory.slots)
+            {
+                Debug.Log($"Inventory is full.");
+                return;
+            }
             inventory.items.Add(item);
             Debug.Log($"Added {item.name} to inventory {inventoryId}.");
+            
+            OnItemAdded?.Invoke(inventoryId, item);
         }
         else
         {

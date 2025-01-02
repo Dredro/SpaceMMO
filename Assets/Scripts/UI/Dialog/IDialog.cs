@@ -1,10 +1,12 @@
 using Interactions;
 
-public interface IDialog : IInteractor
+public interface IDialog
 {
     public string Title { get; set; }
     public string Body { get; set; }
 
-    public void Show();
+    public void Confirm();
+    public void Cancel();
+    public void Show(InteractionData data);
     public void Hide();
 }
