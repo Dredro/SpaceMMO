@@ -1,6 +1,6 @@
 namespace Mob
 {
-    public interface MobBehaviour
+    public interface IMobBehaviour
     {
         public void ExecuteBehaviour();
     }

@@ -187,14 +187,13 @@ GameObject:
   - component: {fileID: 7990525442883005801}
   - component: {fileID: 7970630400495022090}
   - component: {fileID: 4008656455924142134}
-  - component: {fileID: 6162764579969129505}
   m_Layer: 5
   m_Name: Dialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7990525442883005801
 RectTransform:
   m_ObjectHideFlags: 0
@@ -255,21 +254,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6162764579969129505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 239328136646483601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af87298f1a0d4a5eba5cffe6249968c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: {fileID: 928494173844060941}
-  body: {fileID: 6420042356859939901}
-  armorDecoratorIcon: {fileID: 1016936362648162447}
 --- !u!1 &3107938099150897188
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,8 +319,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -493,6 +477,7 @@ GameObject:
   - component: {fileID: 9156560258923353867}
   - component: {fileID: 54553186190347395}
   - component: {fileID: 2223999751184157346}
+  - component: {fileID: 1180484432178018170}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -538,7 +523,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -583,6 +568,23 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1180484432178018170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6407737022713419485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af87298f1a0d4a5eba5cffe6249968c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: {fileID: 928494173844060941}
+  body: {fileID: 6420042356859939901}
+  armorDecoratorIcon: {fileID: 1016936362648162447}
+  panel: {fileID: 239328136646483601}
+  armorDecorator: {fileID: 11400000, guid: 9549936dd160b654fa2bbf6aa6ae46b7, type: 2}
 --- !u!1 &7795681379377365434
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,7 +842,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6162764579969129505}
+      - m_Target: {fileID: 1180484432178018170}
         m_TargetAssemblyTypeName: UI.Dialog.EnhanceDialog, Assembly-CSharp
         m_MethodName: Confirm
         m_Mode: 1
