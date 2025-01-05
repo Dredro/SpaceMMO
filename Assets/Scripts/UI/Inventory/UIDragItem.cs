@@ -19,7 +19,7 @@ public class UIDragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         tempEmptyItem = new GameObject("Empty");
         tempEmptyItem.transform.SetParent(transform);
     }
-
+    
     public void OnBeginDrag(PointerEventData eventData)
     {
        if(temporaryParent == null)

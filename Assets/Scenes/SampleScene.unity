@@ -1685,6 +1685,10 @@ PrefabInstance:
       propertyPath: userSlot
       value: 
       objectReference: {fileID: 5638983813424571925}
+    - target: {fileID: 1180484432178018170, guid: 883672b8e841c9c40828c9d5dbcc55a5, type: 3}
+      propertyPath: confirmButton
+      value: 
+      objectReference: {fileID: 7708785781058082410}
     - target: {fileID: 4098949287444274044, guid: 883672b8e841c9c40828c9d5dbcc55a5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.55

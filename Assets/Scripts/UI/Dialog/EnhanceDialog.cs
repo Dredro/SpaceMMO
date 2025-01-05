@@ -1,8 +1,11 @@
 using Interactions;
+using InventorySystem;
 using NPC;
 using TMPro;
 using UI.Inventory;
 using UnityEngine;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 namespace UI.Dialog
 {
@@ -16,6 +19,8 @@ namespace UI.Dialog
         [SerializeField] private TextMeshProUGUI body;
         [SerializeField] private GameObject panel;
         [SerializeField] private UITemporarySlot userSlot;
+        [SerializeField] private Button confirmButton;
+        [SerializeField] private Button decorateFireResistanceOptionButton;
         private Enhancer _npc;
         private InteractionData _interactionData;
         private DecorateOptions _selectedDecorationOption = DecorateOptions.FireResistance;
@@ -45,6 +50,8 @@ namespace UI.Dialog
         {
             panel.SetActive(false);
             _npc = GetComponentInParent<Enhancer>();
+            if(confirmButton == null) Debug.LogError("Confirm button is null!");
+            if(decorateFireResistanceOptionButton == null) Debug.LogError("Decorate fireresistance button is null!");
         }
 
         /// <summary>
@@ -57,11 +64,17 @@ namespace UI.Dialog
 
             if (_interactionData.Source is Player player)
             {
-            
-                Armor armor = null;
-                foreach (var item in player.inventory.items)
+                if (userSlot.itemInSlot == null)
                 {
-                    if (item is Armor a)
+                    Body = "Give me your armor to upgrade";
+                    return;
+                }
+                var itemId = userSlot.itemInSlot.itemId;
+                var playerInventory = InventoryController.Instance.GetInventory(player.inventory.id);
+                Armor armor = null;
+                foreach (var item in playerInventory.items)
+                {
+                    if (item is Armor a && item.id == itemId )
                     {
                         armor = a;
                         break;
@@ -106,6 +119,8 @@ namespace UI.Dialog
             Title = _npc.Name;
             Body = _npc.BodyText;
             panel.SetActive(true);
+            confirmButton.onClick.AddListener(Confirm);
+            decorateFireResistanceOptionButton.onClick.AddListener(OnDecorateArmorWithFireResistanceClick);
         }
 
         /// <summary>
@@ -116,13 +131,16 @@ namespace UI.Dialog
             _interactionData.Source = null;
             userSlot.OnHide();
             panel.SetActive(false);
+            confirmButton.onClick.RemoveListener(Confirm);
+            decorateFireResistanceOptionButton.onClick.RemoveListener(OnDecorateArmorWithFireResistanceClick);
         }
 
         /// <summary>
         /// Sets the selected decoration option to Fire Resistance.
         /// </summary>
-        public void OnDecorateArmorClick()
+        public void OnDecorateArmorWithFireResistanceClick()
         {
+            Body = "So you wanna decorate item with fire resistance?";
             _selectedDecorationOption = DecorateOptions.FireResistance;
         }
     }

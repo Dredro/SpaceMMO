@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -22,6 +23,7 @@ namespace UI.Inventory
 
         public void OnHide()
         { 
+            if(itemInSlot.IsDestroyed()) return;
             if(itemInSlot == null) return;
             itemInSlot.temporaryParent = null; 
             itemInSlot.transform.SetParent(transform.root);
