@@ -1,6 +1,7 @@
 using Interactions;
 using NPC;
 using TMPro;
+using UI.Inventory;
 using UnityEngine;
 
 namespace UI.Dialog
@@ -14,7 +15,7 @@ namespace UI.Dialog
         [SerializeField] private TextMeshProUGUI title;
         [SerializeField] private TextMeshProUGUI body;
         [SerializeField] private GameObject panel;
-
+        [SerializeField] private UITemporarySlot userSlot;
         private Enhancer _npc;
         private InteractionData _interactionData;
         private DecorateOptions _selectedDecorationOption = DecorateOptions.FireResistance;
@@ -56,6 +57,7 @@ namespace UI.Dialog
 
             if (_interactionData.Source is Player player)
             {
+            
                 Armor armor = null;
                 foreach (var item in player.inventory.items)
                 {
@@ -112,6 +114,7 @@ namespace UI.Dialog
         public void Hide()
         {
             _interactionData.Source = null;
+            userSlot.OnHide();
             panel.SetActive(false);
         }
 

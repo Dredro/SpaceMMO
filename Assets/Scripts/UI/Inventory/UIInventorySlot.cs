@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace UI.Inventory
 {
-    public class UISlot : MonoBehaviour,IDropHandler
+    public class UIInventorySlot : MonoBehaviour,IDropHandler
     {
         public void OnDrop(PointerEventData eventData)
         {

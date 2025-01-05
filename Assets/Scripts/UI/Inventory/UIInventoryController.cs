@@ -10,7 +10,7 @@ namespace UI.Inventory
         [SerializeField] private GameObject slotPrefab;
         [SerializeField] private GameObject uiItemPrefab;
         [SerializeField] private GameObject content;
-        [SerializeField] private List<UISlot> slots = new List<UISlot>();
+        [SerializeField] private List<UIInventorySlot> slots = new List<UIInventorySlot>();
 
         public string inventoryId = "player:0";
         private global::Inventory _inventory;
@@ -40,7 +40,7 @@ namespace UI.Inventory
             for (int i = 0; i < slotCount; i++)
             {
                 var slotInstance = Instantiate(slotPrefab, content.transform);
-                if (slotInstance.TryGetComponent(out UISlot uiSlot))
+                if (slotInstance.TryGetComponent(out UIInventorySlot uiSlot))
                 {
                     slots.Add(uiSlot);
                 }
