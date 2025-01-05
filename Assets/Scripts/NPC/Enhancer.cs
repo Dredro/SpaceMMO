@@ -21,7 +21,7 @@ namespace NPC
             Debug.Log(BodyText);
         }
     
-        public bool DecorateArmor(Inventory inventory,Armor armor)
+        public bool DecorateArmorWithFireResistance(Inventory inventory,Armor armor)
         {
             if (armor != null && armor is not FireResistanceDecorator)
             {

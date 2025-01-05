@@ -9,7 +9,6 @@ namespace Mob
         
         public void ExecuteBehaviour(MobAI agent)
         {
-            Inventory ??= InventoryController.Instance.GetInventory("mob:0");
             agent.Patrol();
         }
 

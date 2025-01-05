@@ -6,12 +6,11 @@ namespace Mob
     public class MobAI : MonoBehaviour
     {
         [Header("Patrol Settings")]
-        public float patrolRadius = 20f;          // Promień, w którym będą generowane cele patrolowe
-        public float waitTime = 2f;               // Czas oczekiwania na każdym celu
-
+        public float patrolRadius = 20f;         
+        public float waitTime = 2f;              
         [Header("Detection Settings")]
-        public float detectionRadius = 10f;       // Promień wykrywania gracza
-        public LayerMask playerLayer;             // Warstwa gracza
+        public float detectionRadius = 10f;       
+        public LayerMask playerLayer;           
 
         private NavMeshAgent agent;
         public float waitTimer = 0f;
@@ -31,9 +30,6 @@ namespace Mob
             SetRandomDestination();
         }
 
-       
-
-        // Ustawia losowy cel na NavMesh w obrębie patrolRadius
         void SetRandomDestination()
         {
             Vector3 origin = transform.position;
@@ -80,7 +76,7 @@ namespace Mob
                 {
                     isWaiting = true;
                     waitTimer = 0f;
-                    Debug.Log("Agent oczekuje na miejscu.");
+                    Debug.Log("Agent waiting!");
                 }
                 else
                 {
@@ -88,7 +84,7 @@ namespace Mob
                     if (waitTimer >= waitTime)
                     {
                         isWaiting = false;
-                        Debug.Log("Czas oczekiwania zakończony. Ustawianie nowego celu.");
+                        Debug.Log("Agent set new target!");
                         SetRandomDestination();
                     }
                 }
@@ -109,19 +105,19 @@ namespace Mob
 
             if (player == null)
             {
-                Debug.LogWarning("Player Transform is null w FollowPlayer.");
+                Debug.LogWarning("Player Transform is null in FollowPlayer.");
                 return;
             }
 
             agent.SetDestination(player.position);
-            Debug.Log($"Śledzenie gracza: {player.name}");
+            Debug.Log($"Following player: {player.name}");
         }
 
         public void DetectAndFollowPlayer()
         {
             if (playerLayer == 0)
             {
-                Debug.LogError("Player Layer nie jest ustawiona w skrypcie MobAI.");
+                Debug.LogError("Player Layer is not set in MobAI.");
                 return;
             }
 
@@ -134,34 +130,31 @@ namespace Mob
                     if (!isFollowingPlayer)
                     {
                         isFollowingPlayer = true;
-                        Debug.Log("Gracz wykryty. Rozpoczynanie śledzenia.");
+                        Debug.Log("Player detected!");
                     }
                     FollowPlayer(player);
                 }
                 else
                 {
-                    Debug.LogWarning("Player Transform jest null.");
+                    Debug.LogWarning("Player Transform is null.");
                 }
             }
             else
             {
                 if (isFollowingPlayer)
                 {
-                    Debug.Log("Gracz nie jest już wykrywany. Powrót do patrolowania.");
+                    Debug.Log("Player escape!");
                     isFollowingPlayer = false;
                     SetRandomDestination();
                 }
             }
         }
 
-        // Opcjonalnie: Wizualizacja promienia wykrywania i patrolu w Edytorze
         void OnDrawGizmosSelected()
         {
-            // Rysuj promień wykrywania
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, detectionRadius);
 
-            // Rysuj promień patrolu
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, patrolRadius);
         }
