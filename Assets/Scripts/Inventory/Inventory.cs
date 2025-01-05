@@ -10,5 +10,5 @@ public class Inventory
 {
     public string id;
     public List<Item> items = new List<Item>();
-    public int slots = 8;
+    public int slots = 10;
 }
