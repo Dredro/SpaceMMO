@@ -1,13 +1,8 @@
-using System;
-using UnityEngine;
+using InventorySystem;
 
-[Serializable]
-public abstract class Item : ScriptableObject
+public abstract class Item
 {
-    [SerializeField] public string id;
-    [SerializeField] public string name;
-    [SerializeField] public int value;
-    [SerializeField] public Sprite icon;
+    public ItemData itemData;
     public abstract void Use();
     public abstract void Drop();
     public abstract void PickUp();

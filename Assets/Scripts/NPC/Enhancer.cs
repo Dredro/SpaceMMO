@@ -26,15 +26,7 @@ namespace NPC
         {
             if (armor != null && armor is not FireResistanceDecorator)
             {
-                var fireResistantArmor = ScriptableObject.CreateInstance<FireResistanceDecorator>();
-
-                fireResistantArmor.Init(armor);
-                fireResistantArmor.ApplyFireResistance();
-
-                Debug.Log($"Added fire resistance to {armor.name}. New item: {fireResistantArmor.name}");
-               
-                InventoryController.Instance.RemoveItem(inventory.id,armor.id);
-                InventoryController.Instance.AddItem(inventory.id,fireResistantArmor.id);
+                armor = new FireResistanceDecorator(armor); // TO CHANGE
                 
                 return true;
             }

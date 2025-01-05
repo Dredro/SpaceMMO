@@ -47,14 +47,14 @@ namespace InventorySystem
         {
             foreach (var item in starterPack)
             {
-                AddItem(inventoryId,item.id);
+                AddItem(inventoryId,item.itemData.id);
             }
         }
         private void InitializeItemsFromUnityInspector()
         {
             foreach (var item in items)
             {
-                _items.Add(item.id,item);
+                _items.Add(item.itemData.id,item);
             }
 
         }
@@ -97,7 +97,7 @@ namespace InventorySystem
                 if (_items.TryGetValue(itemId, out var item))
                 {
                     inventory.items.Add(item);
-                    Debug.Log($"Added {item.name} to inventory {inventoryId}.");
+                    Debug.Log($"Added {item.itemData.name} to inventory {inventoryId}.");
 
                     OnItemAdded?.Invoke(inventoryId, item);
                 }
@@ -121,11 +121,11 @@ namespace InventorySystem
                     if (_inventories[inventoryId].items.Contains(_items[itemId]))
                     {
                         _inventories[inventoryId].items.Remove(_items[itemId]);
-                        Debug.Log($"Removed {_items[itemId].name} from inventory {inventoryId}.");
+                        Debug.Log($"Removed {_items[itemId].itemData.name} from inventory {inventoryId}.");
                     }
                     else
                     {
-                        Debug.Log($"Item {_items[itemId].name} not found in inventory {inventoryId}.");
+                        Debug.Log($"Item {_items[itemId].itemData.name} not found in inventory {inventoryId}.");
                     }
                 }
                 else
@@ -147,7 +147,7 @@ namespace InventorySystem
                 Debug.Log($"Inventory {inventoryId}:");
                 foreach (var item in _inventories[inventoryId].items)
                 {
-                    Debug.Log($"- {item.name}");
+                    Debug.Log($"- {item.itemData.name}");
                 }
             }
             else

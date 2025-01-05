@@ -1,9 +1,10 @@
 using System;
+using Items.Armor;
 using UnityEngine;
 
 [Serializable]
 public abstract class Armor : Item
 {
-    [SerializeField] public int defenseValue;
-    [SerializeField] public float weight;
+    public ArmorData armorData;
+
 }

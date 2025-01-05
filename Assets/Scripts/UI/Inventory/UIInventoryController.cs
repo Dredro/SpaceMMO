@@ -61,7 +61,7 @@ namespace UI.Inventory
                 var uiItem = Instantiate(uiItemPrefab, uiSlot.transform);
                 if(uiItem.TryGetComponent(out UIDragItem uiDragItem))
                 {
-                    uiDragItem.itemId = items[i].id;
+                    uiDragItem.itemId = items[i].itemData.id;
                 }
                 else
                 {
@@ -70,13 +70,13 @@ namespace UI.Inventory
                 var image = uiItem.GetComponent<Image>();
                 if (image != null)
                 {
-                    image.sprite = items[i].icon;
+                    image.sprite = items[i].itemData.icon;
                 }
                 else
                 {
                     Debug.LogError("UIItem prefab is missing an Image component!");
                 }
-                uiItem.name = items[i].name;
+                uiItem.name = items[i].itemData.name;
             }
         }
 
