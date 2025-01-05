@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using InventorySystem;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +14,7 @@ namespace UI.Inventory
         [SerializeField] private List<UIInventorySlot> slots = new List<UIInventorySlot>();
 
         public string inventoryId = "player:0";
-        private global::Inventory _inventory;
+        private InventorySystem.Inventory _inventory;
 
         private void Start()
         {
@@ -58,6 +59,14 @@ namespace UI.Inventory
             {
                 var uiSlot = slots[i];
                 var uiItem = Instantiate(uiItemPrefab, uiSlot.transform);
+                if(uiItem.TryGetComponent(out UIDragItem uiDragItem))
+                {
+                    uiDragItem.itemId = items[i].id;
+                }
+                else
+                {
+                    Debug.LogError("UiItem prefab is missing an UIDragItem component!");
+                }
                 var image = uiItem.GetComponent<Image>();
                 if (image != null)
                 {

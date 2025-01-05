@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UIDragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    public string itemId;
     private Image _image;
     [HideInInspector] public Transform nextParent;
     [HideInInspector] public Transform temporaryParent;

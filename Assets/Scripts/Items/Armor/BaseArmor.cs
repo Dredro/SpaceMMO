@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
+[CreateAssetMenu(menuName = "Armor")]
 public class BaseArmor : Armor
 {
     public override void Use()

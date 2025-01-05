@@ -5,10 +5,14 @@ using Unity.Collections;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-[Serializable]
-public class Inventory
+
+namespace InventorySystem
 {
-    public string id;
-    public List<Item> items = new List<Item>();
-    public int slots = 10;
+    [Serializable]
+    public class Inventory
+    {
+        public string id;
+        internal List<Item> items = new List<Item>();
+        public int slots = 10;
+    }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Interactions;
+using InventorySystem;
 using UnityEngine;
 
 namespace NPC
@@ -32,8 +33,8 @@ namespace NPC
 
                 Debug.Log($"Added fire resistance to {armor.name}. New item: {fireResistantArmor.name}");
                
-                InventoryController.Instance.RemoveItem(inventory.id,armor);
-                InventoryController.Instance.AddItem(inventory.id,fireResistantArmor);
+                InventoryController.Instance.RemoveItem(inventory.id,armor.id);
+                InventoryController.Instance.AddItem(inventory.id,fireResistantArmor.id);
                 
                 return true;
             }

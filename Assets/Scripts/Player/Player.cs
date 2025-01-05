@@ -1,4 +1,5 @@
 using System;
+using InventorySystem;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
@@ -20,9 +21,7 @@ public class Player : MonoBehaviour
             {
                 throw new Exception("Inventory loading failed!");
             }
-        
-            InventoryController.Instance.AddBasicArmorMock(inventory.id);
-
+            InventoryController.Instance.GetStarterPack(inventory.id);
             stats = StatsController.Instance.GetStats("0");
             if (stats == null)
             {
