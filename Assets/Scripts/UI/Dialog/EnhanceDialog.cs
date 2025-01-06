@@ -74,7 +74,7 @@ namespace UI.Dialog
                 Armor armor = null;
                 foreach (var item in playerInventory.items)
                 {
-                    if (item is Armor a && item.itemData.id == itemId )
+                    if (item is Armor a && item.id == itemId )
                     {
                         armor = a;
                         break;

@@ -7,16 +7,16 @@ public class BaseArmor : Armor
 {
     public override void Use()
     {
-        Debug.Log($"Using {itemData.name} with {armorData.defenseValue} defense.");
+        Debug.Log($"Using {name} with {defenseValue} defense.");
     }
 
     public override void Drop()
     {
-        Debug.Log($"Dropping {itemData.name}.");
+        Debug.Log($"Dropping {name}.");
     }
 
     public override void PickUp()
     {
-        Debug.Log($"Picking up {itemData.name}.");
+        Debug.Log($"Picking up {name}.");
     }
 }

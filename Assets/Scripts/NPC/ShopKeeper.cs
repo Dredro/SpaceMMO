@@ -22,12 +22,12 @@ namespace NPC
         {
             if (Inventory != null && Inventory.items.Contains(item))
             {
-                Debug.Log($"You have purchased: {item.itemData.name}.");
+                Debug.Log($"You have purchased: {item.name}.");
                 Inventory.items.Remove(item);
             }
             else
             {
-                Debug.Log($"Sorry, I don't have {item.itemData.name} in stock.");
+                Debug.Log($"Sorry, I don't have {item.name} in stock.");
             }
         }
        

@@ -1,29 +1,36 @@
-using Items.Armor;
+using UnityEngine;
 
-
+[CreateAssetMenu(fileName = "New ArmorDecorator", menuName = "Inventory/Armor/Decorator")]
 public abstract class ArmorDecorator : Armor
 {
-    protected Armor wrappedArmor;
-
-    public ArmorDecorator(Armor wrappedArmor)
+    [SerializeField] protected Armor baseArmor;
+    [SerializeField] public Sprite icon;
+    public void Init(Armor baseArmor)
     {
-        this.wrappedArmor = wrappedArmor;
-        armorData = wrappedArmor.armorData;
-        itemData = wrappedArmor.itemData;
+        this.baseArmor = baseArmor;
+
+        if (baseArmor != null)
+        {
+            id = baseArmor.id;
+            name = baseArmor.name;
+            value = baseArmor.value;
+            defenseValue = baseArmor.defenseValue;
+            weight = baseArmor.weight;
+        }
     }
 
     public override void Use()
     {
-        wrappedArmor.Use();
+        baseArmor?.Use();
     }
 
     public override void Drop()
     {
-        wrappedArmor.Drop();
+        baseArmor?.Drop();
     }
 
     public override void PickUp()
     {
-        wrappedArmor.PickUp();
+        baseArmor?.PickUp();
     }
 }
