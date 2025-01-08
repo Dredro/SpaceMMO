@@ -1,5 +1,7 @@
+using Input;
 using InventorySystem.UI;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace InventorySystem
 {
@@ -40,21 +42,20 @@ namespace InventorySystem
 
         private void Update()
         {
-            if (Input.inputString != null)
-            {
-                var isNumber = int.TryParse(Input.inputString, out int number);
-                if (isNumber && number >= 0 && number < 5)
-                {
-                    ChangeSelectedSlot(number-1);
-                }
-            }
-
-            if (Input.GetKeyDown(KeyCode.KeypadEnter))
+            if (UnityEngine.Input.GetKeyDown(KeyCode.KeypadEnter))
             {
                 var itemController = GetSelectedItem(false);
                 if (itemController != null)
                 {
                   itemController.Item.Use();
+                }
+            }
+            if (UnityEngine.Input.inputString != null)
+            {
+                var isNumber = int.TryParse(UnityEngine.Input.inputString, out int number);
+                if (isNumber && number >= 0 && number < 5)
+                {
+                    ChangeSelectedSlot(number-1);
                 }
             }
         }
@@ -121,5 +122,7 @@ namespace InventorySystem
             var inventoryItem = newItemGameObject.GetComponent<InventoryItem>();
             inventoryItem.InitialiseItem(itemController);
         }
+        
+
     }
 }

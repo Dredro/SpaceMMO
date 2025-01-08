@@ -1,6 +1,8 @@
 using System;
+using Input;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace InventorySystem.UI
@@ -9,7 +11,7 @@ namespace InventorySystem.UI
     {
         private Image image;
         [HideInInspector] public Transform parentAfterDrag;
-
+        
         private void Start()
         {
             image = GetComponent<Image>();
@@ -17,7 +19,7 @@ namespace InventorySystem.UI
 
         public void OnDrag(PointerEventData eventData)
         {
-            transform.position = Input.mousePosition;
+            transform.position = UnityEngine.Input.mousePosition;
         }
 
         public void OnBeginDrag(PointerEventData eventData)

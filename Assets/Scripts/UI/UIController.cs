@@ -10,6 +10,12 @@ public class UIController : MonoBehaviour
    [SerializeField] private GameObject enhancer;
 
    private bool isActive;
+
+   private void Update()
+   {
+      if(UnityEngine.Input.GetKeyDown(KeyCode.E)) OnInventoryShow(!isActive);
+   }
+
    private void Awake()
    {
       if(!inventory) Debug.LogError("Inventory is null (UIController)");
@@ -17,12 +23,7 @@ public class UIController : MonoBehaviour
       if(!armor) Debug.LogError("Armor is null (UIController)");
       if(!enhancer) Debug.LogError("Enhancer is null (UIController)");
    }
-
-   private void Update()
-   {
-      if(Input.GetKeyDown(KeyCode.E)) OnInventoryShow(!isActive);
-   }
-
+   
    public void OnInventoryShow(bool active)
    {
       isActive = active;
@@ -30,5 +31,6 @@ public class UIController : MonoBehaviour
       armor.SetActive(active);
       enhancer.SetActive(active);
    }
-  
+   
+   
 }
