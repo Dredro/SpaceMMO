@@ -11,18 +11,18 @@ namespace LocomotionSystem.Input
         #region Class Variables
         public Vector2 ScrollInput { get; private set; }
 
-        [SerializeField] private CinemachineVirtualCamera _virtualCamera;
+        [SerializeField] private CinemachineCamera _virtualCamera;
         [SerializeField] private float _cameraZoomSpeed = 0.1f;
         [SerializeField] private float _cameraMinZoom = 1f;
         [SerializeField] private float _cameraMaxZoom = 5f;
 
-        private Cinemachine3rdPersonFollow _thirdPersonFollow;
+        private CinemachineThirdPersonFollow _thirdPersonFollow;
         #endregion
 
         #region Startup
         private void Awake()
         {
-            _thirdPersonFollow = _virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+            _thirdPersonFollow = _virtualCamera.GetComponent<CinemachineThirdPersonFollow>();
         }
         private void OnEnable()
         {
