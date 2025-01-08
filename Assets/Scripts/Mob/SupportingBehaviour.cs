@@ -1,4 +1,3 @@
-using InventorySystem;
 using UnityEngine;
 
 namespace Mob
@@ -6,7 +5,6 @@ namespace Mob
     public class SupportingBehaviour : IMobBehaviour
     {
         public int HealAmount { get; set; }
-        public Inventory Inventory { get; set; }
 
         public void ExecuteBehaviour(MobAI agent)
         {

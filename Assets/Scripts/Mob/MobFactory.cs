@@ -1,4 +1,3 @@
-using InventorySystem;
 using UnityEngine;
 
 namespace Mob
@@ -65,7 +64,7 @@ namespace Mob
             MobBuilder builder = new MobBuilder(mob);
             builder.SetName(name)
                 .SetHealth(health)
-                .SetBehaviour(new SupportingBehaviour { HealAmount = healAmount, Inventory = new Inventory() })
+                .SetBehaviour(new SupportingBehaviour { HealAmount = healAmount})
                 .Build();
 
             mob.PerformBehaviour();
@@ -90,7 +89,7 @@ namespace Mob
             MobBuilder builder = new MobBuilder(mob);
             builder.SetName(name)
                 .SetHealth(health)
-                .SetBehaviour(new ResourceProvidingBehaviour { Inventory = new Inventory() })
+                .SetBehaviour(new ResourceProvidingBehaviour {})
                 .Build();
 
             mob.PerformBehaviour();

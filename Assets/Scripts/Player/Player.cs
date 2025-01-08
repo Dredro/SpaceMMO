@@ -1,14 +1,10 @@
 using System;
-using InventorySystem;
-using NUnit.Framework;
-using UnityEditor;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] public string id;
     public Stats stats;
-    public Inventory inventory;
     private PlayerState currentState;
    
 
@@ -16,12 +12,6 @@ public class Player : MonoBehaviour
     {
         try
         {
-            inventory = InventoryController.Instance.GetInventory("player:0");
-            if (inventory == null)
-            {
-                throw new Exception("Inventory loading failed!");
-            }
-            InventoryController.Instance.GetStarterPack(inventory.id);
             stats = StatsController.Instance.GetStats("0");
             if (stats == null)
             {
