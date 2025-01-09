@@ -44,11 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c40d06af25e4d838ca5cedc4d9062a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startItems:
-  - {fileID: 7845843258702266448, guid: 257151b7929cfaa4eb0faf9e55989c7a, type: 3}
-  - {fileID: 1023753772847421527, guid: ab57f6eb25eeb684c83cc19e549e3843, type: 3}
-  maxStackedItem: 255
-  inventoryItemPrefab: {fileID: 5533114855855608831, guid: 7163019ea625aec42b74789b40681d4f, type: 3}
+  startItems: []
+  maxStackedItem: 10
+  inventoryItemPrefab: {fileID: 2807611648319543447, guid: 4f7bfd1fd65adfe44a6f48dd86fda166, type: 3}
   inventorySlots:
   - {fileID: 0}
   - {fileID: 0}

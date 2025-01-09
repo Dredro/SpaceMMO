@@ -18,6 +18,7 @@ namespace InventorySystem.UI
         [SerializeField] private TextMeshProUGUI itemName;
         [SerializeField] private Image icon;
         [SerializeField] private Image decoratorIcon;
+        public GameObject namePanel;
         public void InitialiseItem(ItemController itemController)
         {
             this.itemController = itemController;
@@ -40,6 +41,10 @@ namespace InventorySystem.UI
                 stackable = currentItem.Stackable;
             }
 
+            if (transform.parent.TryGetComponent(out InventorySlot slot))
+            {
+                namePanel.SetActive(!slot.isPlayerDeck);
+            }
             RefreshCount();
         }
 
