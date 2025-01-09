@@ -35,6 +35,8 @@ public class Stats : ISubject
         }
     }
 
+    public int Damage { get; set; } = 10;
+
 
     public List<IObserver> Observers { get; set; } = new();
     

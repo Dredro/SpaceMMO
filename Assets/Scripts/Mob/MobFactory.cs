@@ -1,23 +1,23 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Mob
 {
     public class MobFactory : MonoBehaviour
     {
-        [Header("Mob Prefabs")] [SerializeField]
-        private GameObject aggressiveMobPrefab;
+        [Header("Mob Prefabs")] 
+        [SerializeField] private GameObject aggressiveMobPrefab;
+        [SerializeField] private GameObject neutralMobPrefab;
+        [SerializeField] private GameObject friendlyMobPrefab;
 
-        [SerializeField] private GameObject supportingMobPrefab;
-        [SerializeField] private GameObject resourceProvidingMobPrefab;
-
-        [Header("Parent for Mobs")] [SerializeField]
-        private Transform mobsParent;
+        [Header("Parent for Mobs")] 
+        [SerializeField] private Transform mobsParent;
 
         void Start()
         {
             CreateAggressiveMob("Goblin", 100, 25);
-            CreateSupportingMob("Healer", 80, 15);
-            CreateResourceProvidingMob("Gatherer", 90);
+            CreateNeutralMob("Healer", 80, 15);
+            CreateFriendlyMob("Gatherer", 90);
         }
 
         public void CreateAggressiveMob(string name, int health, int damage)
@@ -45,51 +45,51 @@ namespace Mob
             mob.PerformBehaviour();
         }
 
-        public void CreateSupportingMob(string name, int health, int healAmount)
+        public void CreateNeutralMob(string name, int health, int healAmount)
         {
-            if (supportingMobPrefab == null)
+            if (neutralMobPrefab == null)
             {
-                Debug.LogError("Supporting Mob Prefab is not assigned.");
+                Debug.LogError("neutral Mob Prefab is not assigned.");
                 return;
             }
 
-            GameObject mobObject = Instantiate(supportingMobPrefab, mobsParent);
+            GameObject mobObject = Instantiate(neutralMobPrefab, mobsParent);
             Mob mob = mobObject.GetComponent<Mob>();
             if (mob == null)
             {
-                Debug.LogError("Supporting Mob Prefab does not have a Mob component.");
+                Debug.LogError("Neutral Prefab does not have a Mob component.");
                 return;
             }
 
             MobBuilder builder = new MobBuilder(mob);
             builder.SetName(name)
                 .SetHealth(health)
-                .SetBehaviour(new SupportingBehaviour { HealAmount = healAmount})
+                .SetBehaviour(new NeutralBehaviour())
                 .Build();
 
             mob.PerformBehaviour();
         }
 
-        public void CreateResourceProvidingMob(string name, int health)
+        public void CreateFriendlyMob(string name, int health)
         {
-            if (resourceProvidingMobPrefab == null)
+            if (friendlyMobPrefab == null)
             {
-                Debug.LogError("Resource Providing Mob Prefab is not assigned.");
+                Debug.LogError("Friendly Mob Prefab is not assigned.");
                 return;
             }
 
-            GameObject mobObject = Instantiate(resourceProvidingMobPrefab, mobsParent);
+            GameObject mobObject = Instantiate(friendlyMobPrefab, mobsParent);
             Mob mob = mobObject.GetComponent<Mob>();
             if (mob == null)
             {
-                Debug.LogError("Resource Providing Mob Prefab does not have a Mob component.");
+                Debug.LogError("Friendly Mob Prefab does not have a Mob component.");
                 return;
             }
 
             MobBuilder builder = new MobBuilder(mob);
             builder.SetName(name)
                 .SetHealth(health)
-                .SetBehaviour(new ResourceProvidingBehaviour {})
+                .SetBehaviour(new FriendlyBehaviour {})
                 .Build();
 
             mob.PerformBehaviour();

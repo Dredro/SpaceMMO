@@ -22,6 +22,15 @@ namespace Mob
             PerformBehaviour();
         }
 
+        public void TakeDamage(int damage)
+        {
+            health -= damage;
+            if (behaviour is NeutralBehaviour neutralBehaviour)
+            {
+                neutralBehaviour.playerAttackMe = true;
+            }
+            if(health <= 0) Destroy(gameObject);
+        }
         public IMobBehaviour Behaviour
         {
             get => behaviour;
