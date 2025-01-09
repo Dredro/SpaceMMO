@@ -50,7 +50,6 @@ public class Player : MonoBehaviour
                 mob.TakeDamage(stats.Damage);
             }
         }
-
     }
     public void SetState(PlayerState state)
     {
@@ -64,9 +63,9 @@ public class Player : MonoBehaviour
         currentState.Rest();
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int value)
     {
-        currentState.TakeDamage();
+        currentState.TakeDamage(value);
     }
 
     public void PerformAction()

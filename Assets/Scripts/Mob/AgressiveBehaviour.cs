@@ -10,6 +10,9 @@ namespace Mob
         {
             agent.Patrol();
             agent.DetectAndFollowPlayer();
+            agent.Attack(Damage);
         }
+
+        
     }
 }

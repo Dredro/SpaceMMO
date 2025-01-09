@@ -17,6 +17,8 @@ namespace Mob
         private bool isWaiting = false;
         private bool isFollowingPlayer = false;
 
+        private float attackTimer = 0f;
+        private float attackDelay = 2f;
         void Start()
         {
             agent = GetComponent<NavMeshAgent>();
@@ -61,7 +63,24 @@ namespace Mob
                 return;
             }
         }
+        public void Attack(int damage)
+        {
+            if(attackTimer >= attackDelay)
+            {   if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 1f))
+                {
+                    if (hit.transform.TryGetComponent(out Player player))
+                    {
+                        player.TakeDamage(damage);
+                    }
+                }
 
+                attackTimer = 0;
+            }
+            else
+            {
+                attackTimer += Time.deltaTime;
+            }
+        }
         public void Patrol()
         {
             if (agent == null)

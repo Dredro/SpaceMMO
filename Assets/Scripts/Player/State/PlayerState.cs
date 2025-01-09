@@ -7,7 +7,7 @@ public abstract class PlayerState
     }
     
     public abstract void Rest();
-    public abstract void TakeDamage();
+    public abstract void TakeDamage(int value);
     public abstract void PerformAction();
     
 }

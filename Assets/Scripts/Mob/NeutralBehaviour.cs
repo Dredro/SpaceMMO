@@ -4,12 +4,16 @@ namespace Mob
 {
     public class NeutralBehaviour : IMobBehaviour
     {
+        public int Damage { get; set; }
         public bool playerAttackMe;
         public void ExecuteBehaviour(MobAI agent)
         {
             agent.Patrol();
-            if(playerAttackMe)
+            if (playerAttackMe)
+            {
                 agent.DetectAndFollowPlayer();
+                agent.Attack(Damage);
+            }
         }
         
         public void Tame()
