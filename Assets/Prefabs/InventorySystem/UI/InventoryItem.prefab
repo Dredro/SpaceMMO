@@ -459,3 +459,4 @@ MonoBehaviour:
   itemName: {fileID: 1499934987447501110}
   icon: {fileID: 3042473832526399417}
   decoratorIcon: {fileID: 5582290851789372134}
+  namePanel: {fileID: 0}

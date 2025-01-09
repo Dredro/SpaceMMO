@@ -92,6 +92,9 @@ MonoBehaviour:
   image: {fileID: 6927869089423513901}
   selectedColor: {r: 1, g: 1, b: 1, a: 1}
   notSelectedColor: {r: 1, g: 1, b: 1, a: 1}
+  headImage: {fileID: 0}
+  head: {fileID: 0}
+  isPlayerDeck: 0
 --- !u!114 &7817328598180503650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,6 +211,9 @@ MonoBehaviour:
   image: {fileID: 7403385067472269649}
   selectedColor: {r: 1, g: 0, b: 0.5686275, a: 1}
   notSelectedColor: {r: 1, g: 0, b: 0.5686275, a: 1}
+  headImage: {fileID: 0}
+  head: {fileID: 0}
+  isPlayerDeck: 0
 --- !u!114 &8744014028744444717
 MonoBehaviour:
   m_ObjectHideFlags: 0

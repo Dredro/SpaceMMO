@@ -406,7 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d3b37d9e5040869dc8b2398d728574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aggressiveMobPrefab: {fileID: 6372172480798818023, guid: 40a008b1e4cc6f443b96de823ad6ec4f, type: 3}
+  aggressiveMobPrefab: {fileID: 6746967732837099513, guid: 23cbeb7380eda9f478a72dfcc766c89c, type: 3}
   neutralMobPrefab: {fileID: 8102462980975649481, guid: 04b4a7e93fbfb9a44ab44601c04a9213, type: 3}
   friendlyMobPrefab: {fileID: 8294838743704175993, guid: 76a0c86f43a0f004fac04949c896b54b, type: 3}
   mobsParent: {fileID: 422938623}

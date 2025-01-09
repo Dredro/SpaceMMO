@@ -92,6 +92,9 @@ MonoBehaviour:
   image: {fileID: 1493999837072006637}
   selectedColor: {r: 1, g: 0.7529412, b: 0.47058824, a: 1}
   notSelectedColor: {r: 1, g: 1, b: 1, a: 1}
+  headImage: {fileID: 0}
+  head: {fileID: 0}
+  isPlayerDeck: 0
 --- !u!114 &2447451021862205123
 MonoBehaviour:
   m_ObjectHideFlags: 0

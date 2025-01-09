@@ -1,4 +1,5 @@
 using System;
+using Mob.Animation;
 using UnityEngine;
 
 namespace Mob
@@ -11,7 +12,6 @@ namespace Mob
         private MobAI _mobAI;
         public string Name { set => name = value; }
         public int Health {set => health = value; }
-
         private void Awake()
         {
             _mobAI = GetComponent<MobAI>();

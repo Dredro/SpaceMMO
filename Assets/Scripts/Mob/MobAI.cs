@@ -1,3 +1,4 @@
+using Mob.Animation;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,6 +9,7 @@ namespace Mob
         [Header("Patrol Settings")]
         public float patrolRadius = 20f;         
         public float waitTime = 2f;              
+
         [Header("Detection Settings")]
         public float detectionRadius = 10f;       
         public LayerMask playerLayer;           
@@ -17,8 +19,13 @@ namespace Mob
         private bool isWaiting = false;
         private bool isFollowingPlayer = false;
 
-        private float attackTimer = 0f;
+        // Timery i zasięgi ataku
+        private float attackTimer = 2f;
         private float attackDelay = 2f;
+        public float stopDistance = 1f;
+
+        public AnimationController animationController;
+
         void Start()
         {
             agent = GetComponent<NavMeshAgent>();
@@ -60,27 +67,47 @@ namespace Mob
 
             if (!destinationSet)
             {
-                return;
+                Debug.LogWarning("Nie znaleziono żadnego punktu do patrolowania.");
             }
         }
+
+        /// <summary>
+        /// Poprawiona metoda Attack z użyciem OverlapSphere.
+        /// Sprawdza, czy w promieniu stopDistance od przeciwnika jest gracz.
+        /// </summary>
         public void Attack(int damage)
         {
-            if(attackTimer >= attackDelay)
-            {   if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 1f))
+            // Sprawdzamy, czy możemy zaatakować (timer >= attackDelay)
+            if (attackTimer >= attackDelay)
+            {
+                // Szukamy wszystkich obiektów w promieniu stopDistance
+                Collider[] hits = Physics.OverlapSphere(transform.position, stopDistance);
+
+                // Jeśli trafimy w gracza – zadajemy obrażenia i resetujemy timer
+                foreach (var h in hits)
                 {
-                    if (hit.transform.TryGetComponent(out Player player))
+                    if (h.TryGetComponent(out Player player))
                     {
+                        animationController.PlayAttackAnimation();
                         player.TakeDamage(damage);
+
+                        // Zerujemy timer tylko gdy faktycznie trafimy gracza
+                        attackTimer = 0f;
+                        return;
                     }
                 }
-
-                attackTimer = 0;
             }
             else
             {
+                // Odliczamy czas
                 attackTimer += Time.deltaTime;
             }
         }
+
+        /// <summary>
+        /// Patrolowanie – AI wybiera losowy punkt i idzie do niego,
+        /// czekając przez chwilę po dotarciu.
+        /// </summary>
         public void Patrol()
         {
             if (agent == null)
@@ -110,7 +137,10 @@ namespace Mob
             }
         }
 
-
+        /// <summary>
+        /// AI podąża za graczem, jeśli jest w zasięgu.
+        /// Zatrzymuje się, gdy jest zbyt blisko.
+        /// </summary>
         public void FollowPlayer(Transform player)
         {
             if (agent == null)
@@ -118,6 +148,7 @@ namespace Mob
                 agent = GetComponent<NavMeshAgent>();
                 if (agent == null)
                 {
+                    Debug.LogWarning("NavMeshAgent component not found on this GameObject.");
                     return;
                 }
             }
@@ -128,10 +159,25 @@ namespace Mob
                 return;
             }
 
-            agent.SetDestination(player.position);
-            Debug.Log($"Following player: {player.name}");
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+            
+            if (distanceToPlayer <= stopDistance)
+            {
+                agent.isStopped = true;
+                Debug.Log("Zbyt blisko gracza, zatrzymuję się.");
+            }
+            else
+            {
+                agent.isStopped = false;
+                agent.SetDestination(player.position);
+                Debug.Log($"Podążam za graczem: {player.name}");
+            }
         }
 
+        /// <summary>
+        /// Wykrywanie gracza w promieniu detectionRadius
+        /// i ewentualne przejście do trybu śledzenia.
+        /// </summary>
         public void DetectAndFollowPlayer()
         {
             if (playerLayer == 0)
@@ -171,11 +217,17 @@ namespace Mob
 
         void OnDrawGizmosSelected()
         {
+            // Niebieskie kółko pokazuje zasięg wykrywania gracza
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, detectionRadius);
 
+            // Zielone kółko pokazuje zasięg patrolu
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, patrolRadius);
+
+            // Czerwone kółko pokazuje zasięg ataku (stopDistance)
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, stopDistance);
         }
     }
 }
