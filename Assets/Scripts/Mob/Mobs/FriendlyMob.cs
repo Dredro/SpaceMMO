@@ -11,7 +11,7 @@ namespace Mob
         public IBehaviourStrategy BehaviourStrategy { get; set; } = new EscapeStrategy();
 
         public event Action OnDie;
-        
+
         public FriendlyMob(MobDefinition definition)
         {
             MobName = definition.mobName;

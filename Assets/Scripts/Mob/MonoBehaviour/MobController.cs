@@ -4,6 +4,7 @@ using UnityEngine.AI;
 
 namespace Mob
 {
+    [RequireComponent(typeof(MobAnimation))]
     public class MobController : MonoBehaviour
     {
         [SerializeField] private MobDefinition definition;
@@ -19,7 +20,7 @@ namespace Mob
 
         private IBehaviourStrategy _currentStrategy;
         private MobState _currentState;
-
+        public MobAnimation animation;
         private void Awake()
         {
             _mob = MobFactory.Create(definition);
@@ -40,6 +41,7 @@ namespace Mob
 
             _player = GameObject.FindGameObjectWithTag("Player").transform;
             ChangeState(MobState.Patrol);
+            animation = GetComponent<MobAnimation>();
         }
 
         private void Update()
@@ -98,16 +100,10 @@ namespace Mob
                 // dopóki nie zostaną zaatakowane.
             }
         }
-
-        /// <summary>
-        /// Jeśli neutralny mob zostanie zaatakowany, zaczyna atakować.
-        /// Jeśli przyjazny mob zostanie zaatakowany, ucieka.
-        /// Agresywny — standardowo już atakuje (lub ma stan Attack).
-        /// </summary>
+        
         public void TakeDamage(int value)
         {
             _mob.TakeDamage(value);
-
             // Agresywny lub neutralny mob – przechodzi do ataku w odpowiedzi na obrażenia
             if (_mob is AggressiveMob || _mob is NeutralMob)
             {

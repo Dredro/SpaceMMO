@@ -1,4 +1,5 @@
 using UnityEngine;
+using Debug = System.Diagnostics.Debug;
 
 namespace Mob
 {
@@ -10,9 +11,11 @@ namespace Mob
             if (distance > controller.AttackRange)
             {
                 controller.NavAgent.SetDestination(controller.Player.position);
+                controller.animation.PlayMovement();
             }
             else
             {
+                controller.animation.PlayAttack();
                // PlayerHealth playerHealth = controller.Player.GetComponent<PlayerHealth>();
                 /*if (playerHealth != null)
                 {
@@ -24,6 +27,7 @@ namespace Mob
             if (distance > controller.DetectionRange)
             {
                 controller.ChangeState(MobState.Patrol);
+                controller.animation.PlayMovement();
             }
         }
     }

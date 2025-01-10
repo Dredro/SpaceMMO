@@ -10,7 +10,7 @@ namespace Mob.Mobs
         public int AttackDamage { get; set; }
         public IBehaviourStrategy BehaviourStrategy { get; set; } = new AttackStrategy();
         public event Action OnDie;
-        
+
         public AggressiveMob(MobDefinition definition)
         {
             MobName = definition.mobName;

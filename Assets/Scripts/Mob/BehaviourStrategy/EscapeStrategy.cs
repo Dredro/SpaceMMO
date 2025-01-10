@@ -20,6 +20,7 @@ namespace Mob
             {
                 controller.ChangeState(MobState.Patrol);
             }
+            controller.animation.PlayMovement();
         }
     }
 }
