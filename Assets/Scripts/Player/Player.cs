@@ -43,13 +43,13 @@ public class Player : MonoBehaviour
 
     private void Attack()
     {
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 1f))
+        /*if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 1f))
         {
             if (hit.transform.TryGetComponent(out Mob.Mob mob))
             {
                 mob.TakeDamage(stats.Damage);
             }
-        }
+        }*/
     }
     public void SetState(PlayerState state)
     {
