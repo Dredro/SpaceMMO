@@ -1,6 +1,7 @@
 using Mob.Mobs;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 namespace Mob
 {
@@ -20,7 +21,7 @@ namespace Mob
 
         private IBehaviourStrategy _currentStrategy;
         private MobState _currentState;
-        public MobAnimation animation;
+        public MobAnimation Animation;
         private void Awake()
         {
             _mob = MobFactory.Create(definition);
@@ -41,17 +42,14 @@ namespace Mob
 
             _player = GameObject.FindGameObjectWithTag("Player").transform;
             ChangeState(MobState.Patrol);
-            animation = GetComponent<MobAnimation>();
+            Animation = GetComponent<MobAnimation>();
         }
 
         private void Update()
         {
             _currentStrategy?.Execute(this);
         }
-
-        /// <summary>
-        /// Zmiana stanu moba i przypisanie nowej strategii.
-        /// </summary>
+        
         public void ChangeState(MobState newState)
         {
             _currentState = newState;
@@ -81,35 +79,26 @@ namespace Mob
                     break;
             }
         }
-
-        /// <summary>
-        /// Wykrywanie gracza: tylko agresywne moby rozpoczynają atak od razu
-        /// (neutralne i friendly pozostają w patrolu, dopóki nie zostaną zaatakowane).
-        /// </summary>
+        
         public void DetectPlayer()
         {
             float distance = Vector3.Distance(transform.position, _player.position);
             if (distance <= DetectionRange)
             {
-                // Tylko agresywny mob atakuje po wykryciu
                 if (_mob is AggressiveMob)
                 {
                     ChangeState(MobState.Attack);
                 }
-                // Neutralny i przyjazny mob NIC nie robią (pozostają w patrolu),
-                // dopóki nie zostaną zaatakowane.
             }
         }
         
         public void TakeDamage(int value)
         {
             _mob.TakeDamage(value);
-            // Agresywny lub neutralny mob – przechodzi do ataku w odpowiedzi na obrażenia
             if (_mob is AggressiveMob || _mob is NeutralMob)
             {
                 ChangeState(MobState.Attack);
             }
-            // Przyjazny mob – ucieka w odpowiedzi na atak
             else if (_mob is FriendlyMob)
             {
                 ChangeState(MobState.Escape);

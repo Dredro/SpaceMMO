@@ -2,20 +2,21 @@ using System;
 using LocomotionSystem.Input;
 using Mob;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] public string id;
-    public Stats stats;
-    private PlayerState currentState;
+    public string Id;
+    public Stats Stats;
+    private PlayerState _currentState;
     private PlayerActionsInput _playerActionsInput;
 
     private void Start()
     {
         try
         {
-            stats = StatsController.Instance.GetStats("0");
-            if (stats == null)
+            Stats = StatsController.Instance.GetStats("0");
+            if (Stats == null)
             {
                 throw new Exception("Stats loading failed!");
             }
@@ -27,7 +28,7 @@ public class Player : MonoBehaviour
                 throw new Exception("UI components not found!");
             }
 
-            StatsController.Instance.AttachBasicObservers(stats, healthUI, energyUI);
+            StatsController.Instance.AttachBasicObservers(Stats, healthUI, energyUI);
             SetState(new AliveState());
             _playerActionsInput = GetComponent<PlayerActionsInput>();
         }
@@ -48,29 +49,29 @@ public class Player : MonoBehaviour
         {
             if (hit.transform.TryGetComponent(out MobController mobController))
             {
-                mobController.TakeDamage(stats.Damage);
+                mobController.TakeDamage(Stats.Damage);
             }
         }
     }
     public void SetState(PlayerState state)
     {
-        currentState = state;
-        currentState.SetPlayer(this);
-        Debug.Log("Current state: "+ currentState.GetType());
+        _currentState = state;
+        _currentState.SetPlayer(this);
+        Debug.Log("Current state: "+ _currentState.GetType());
     }
 
     public void Rest()
     {
-        currentState.Rest();
+        _currentState.Rest();
     }
 
     public void TakeDamage(int value)
     {
-        currentState.TakeDamage(value);
+        _currentState.TakeDamage(value);
     }
 
     public void PerformAction()
     {
-        currentState.PerformAction();
+        _currentState.PerformAction();
     }
 }

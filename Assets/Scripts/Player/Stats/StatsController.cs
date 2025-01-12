@@ -5,12 +5,9 @@ using UnityEngine;
 
 public class StatsController
 {
-    private static StatsController? _instance;
+    private static StatsController _instance;
     private Stats _stats = new Stats();
-    private StatsController()
-    {
-    }
-
+    
     public static StatsController Instance
     {
         get
@@ -51,7 +48,7 @@ public class StatsController
         stats.Energy += amount;
         if (stats.Energy > 100)
         {
-            stats.Energy = 100; // Cap at maximum value
+            stats.Energy = 100; 
         }
     }
 
@@ -60,7 +57,7 @@ public class StatsController
         stats.Energy -= amount;
         if (stats.Energy < 0)
         {
-            stats.Energy = 0; // Prevent negative values
+            stats.Energy = 0;
         }
     }
 
@@ -69,7 +66,7 @@ public class StatsController
         stats.Health += amount;
         if (stats.Health > 100)
         {
-            stats.Health = 100; // Cap at maximum value
+            stats.Health = 100; 
         }
     }
 
@@ -78,7 +75,7 @@ public class StatsController
         stats.Health -= amount;
         if (stats.Health < 0)
         {
-            stats.Health = 0; // Prevent negative values
+            stats.Health = 0; 
         }
     }
 }

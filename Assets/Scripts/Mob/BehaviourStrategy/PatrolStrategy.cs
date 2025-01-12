@@ -19,7 +19,7 @@ namespace Mob
             }
 
             controller.DetectPlayer();
-            controller.animation.PlayMovement();
+            controller.Animation.PlayMovement();
         }
     }
 }

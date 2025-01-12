@@ -11,11 +11,11 @@ namespace Mob
             if (distance > controller.AttackRange)
             {
                 controller.NavAgent.SetDestination(controller.Player.position);
-                controller.animation.PlayMovement();
+                controller.Animation.PlayMovement();
             }
             else
             {
-                controller.animation.PlayAttack();
+                controller.Animation.PlayAttack();
                // PlayerHealth playerHealth = controller.Player.GetComponent<PlayerHealth>();
                 /*if (playerHealth != null)
                 {
@@ -27,7 +27,7 @@ namespace Mob
             if (distance > controller.DetectionRange)
             {
                 controller.ChangeState(MobState.Patrol);
-                controller.animation.PlayMovement();
+                controller.Animation.PlayMovement();
             }
         }
     }
