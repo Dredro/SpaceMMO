@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Mob
@@ -10,12 +9,16 @@ namespace Mob
 
         public void PlayMovement()
         {
-            _animator.SetFloat("speed",1);
+            _animator.SetBool("movement",true);
+        }
+
+        public void StopMovement()
+        {
+            _animator.SetBool("movement",false);
         }
 
         public void PlayAttack()
         {
-            _animator.SetFloat("speed",0);
             _animator.SetTrigger("attack");
         }
         
