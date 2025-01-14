@@ -21,16 +21,16 @@ MonoBehaviour:
     m_Value: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 18.45
+    m_Value: 0.17
   scatter:
     m_OverrideState: 1
-    m_Value: 0.327
+    m_Value: 0.19
   clamp:
     m_OverrideState: 0
-    m_Value: 65472
+    m_Value: 65468.84
   tint:
     m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
   highQualityFiltering:
     m_OverrideState: 0
     m_Value: 1
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 221518ef91623a7438a71fef23660601, type: 3}
   m_Name: WhiteBalance
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   temperature:
     m_OverrideState: 1
     m_Value: -11
