@@ -77,10 +77,9 @@ namespace LocomotionSystem
             _animator.SetBool(isFallingHash, isFalling);
             _animator.SetBool(isJumpingHash, isJumping);
             _animator.SetBool(isRotatingToTargetHash, _playerController.IsRotatingToTarget);
-            _animator.SetBool(isAttackingHash, _playerActionsInput.AttackPressed);
             _animator.SetBool(isGatheringHash, _playerActionsInput.GatherPressed);
             _animator.SetBool(isPlayingActionHash, isPlayingAction);
-
+            _animator.SetBool(isAttackingHash, _playerActionsInput.AttackPressed);
             _animator.SetFloat(inputXHash, _currentBlendInput.x);
             _animator.SetFloat(inputYHash, _currentBlendInput.y);
             _animator.SetFloat(inputMagnitudeHash, _currentBlendInput.magnitude);

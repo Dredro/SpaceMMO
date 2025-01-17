@@ -1,4 +1,5 @@
 using System;
+using InventorySystem.Item;
 using ObserverPattern;
 using UnityEditor;
 using UnityEngine;
@@ -42,6 +43,11 @@ public class StatsController
             Energy = 100,
             Health = 100
         };
+    }
+
+    public void ChangeArmorStat(int value)
+    {
+        _stats.Armor = value;
     }
     public void AddEnergy(Stats stats, int amount)
     {

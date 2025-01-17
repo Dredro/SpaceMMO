@@ -1,3 +1,5 @@
+using Mob;
+
 public abstract class PlayerState
 {
     protected Player _player;
@@ -8,6 +10,6 @@ public abstract class PlayerState
     
     public abstract void Rest();
     public abstract void TakeDamage(int value);
-    public abstract void PerformAction();
+    public abstract void PerformAction(MobController controller);
     
 }

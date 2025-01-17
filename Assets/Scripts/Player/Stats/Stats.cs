@@ -36,7 +36,7 @@ public class Stats : ISubject
     }
 
     public int Damage { get; set; } = 1;
-
+    public int Armor { get; set; } = 0;
 
     public List<IObserver> Observers { get; set; } = new();
     

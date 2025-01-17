@@ -10,7 +10,11 @@ public class Player : MonoBehaviour
     public Stats Stats;
     private PlayerState _currentState;
     private PlayerActionsInput _playerActionsInput;
-
+    public int actionEnergyCost = 10;
+    private float restDelay = 1f;
+    public PlayerActionsInput actionsInput;
+    private float nextAttackTime = 0f;
+    private float attackDelay = 1f;
     private void Start()
     {
         try
@@ -31,6 +35,8 @@ public class Player : MonoBehaviour
             StatsController.Instance.AttachBasicObservers(Stats, healthUI, energyUI);
             SetState(new AliveState());
             _playerActionsInput = GetComponent<PlayerActionsInput>();
+            actionsInput = GetComponent<PlayerActionsInput>();
+            InvokeRepeating(nameof(Rest),0f,restDelay);
         }
         catch (Exception ex)
         {
@@ -45,12 +51,21 @@ public class Player : MonoBehaviour
 
     private void Attack()
     {
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 2f))
+        if (Time.time >= nextAttackTime)
         {
-            if (hit.transform.TryGetComponent(out MobController mobController))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit,
+                    2f))
             {
-                mobController.TakeDamage(Stats.Damage);
+                if (hit.transform.TryGetComponent(out MobController mobController))
+                {
+                    PerformAction(mobController);
+                }
             }
+            else
+            {
+                PerformAction(null);
+            }
+            nextAttackTime = Time.time + attackDelay;
         }
     }
     public void SetState(PlayerState state)
@@ -70,8 +85,8 @@ public class Player : MonoBehaviour
         _currentState.TakeDamage(value);
     }
 
-    public void PerformAction()
+    public void PerformAction(MobController controller)
     {
-        _currentState.PerformAction();
+        _currentState.PerformAction(controller);
     }
 }

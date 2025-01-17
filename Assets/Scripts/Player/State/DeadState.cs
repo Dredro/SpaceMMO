@@ -1,10 +1,10 @@
+using Mob;
 using UnityEngine;
 
 public class DeadState : PlayerState
 {
     public override void Rest()
     {
-        Object.Destroy(_player.gameObject);
         Debug.Log("Player die");
     }
 
@@ -14,9 +14,8 @@ public class DeadState : PlayerState
         Debug.Log("Player die");
     }
 
-    public override void PerformAction()
+    public override void PerformAction(MobController controller)
     {
-        Object.Destroy(_player.gameObject);
         Debug.Log("Player die");
     }
 }

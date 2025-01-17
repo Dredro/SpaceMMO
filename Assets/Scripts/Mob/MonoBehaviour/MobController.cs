@@ -10,6 +10,7 @@ namespace Mob
     {
         [SerializeField] private MobDefinition definition;
         private IMob _mob;
+        public IMob Mob => _mob;
         private NavMeshAgent _agent;
         public NavMeshAgent NavAgent => _agent;
 
@@ -18,7 +19,10 @@ namespace Mob
 
         public float DetectionRange = 10f;
         public float AttackRange = 2f;
-
+        
+        public float AttackCooldown = 2f;
+        public float NextAttackTime = 0f; 
+        
         private IBehaviourStrategy _currentStrategy;
         private MobState _currentState;
         public MobAnimation Animation;

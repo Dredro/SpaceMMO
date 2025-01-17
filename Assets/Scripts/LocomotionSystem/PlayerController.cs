@@ -56,6 +56,7 @@ namespace LocomotionSystem
         private PlayerMovementState _lastMovementState = PlayerMovementState.Falling;
         #endregion
 
+        private Player _player;
         #region Startup
         private void Awake()
         {

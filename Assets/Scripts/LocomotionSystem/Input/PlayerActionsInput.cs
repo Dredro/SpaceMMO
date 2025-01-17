@@ -15,6 +15,8 @@ namespace LocomotionSystem.Input
         #endregion
 
         #region Startup
+
+        public bool CanAttack = true;
         private void Awake()
         {
             _playerLocomotionInput = GetComponent<PlayerLocomotionInput>();
@@ -80,8 +82,8 @@ namespace LocomotionSystem.Input
         {
             if (!context.performed)
                 return;
-
-            AttackPressed = true;
+            if(CanAttack)
+                AttackPressed = true;
         }
         #endregion
     }
