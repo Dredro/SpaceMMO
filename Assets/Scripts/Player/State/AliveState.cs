@@ -1,6 +1,6 @@
 public class AliveState : PlayerState
 {
-    public override void Rest()
+    public override void StateEnter()
     {
         
     }   
@@ -11,8 +11,8 @@ public class AliveState : PlayerState
         if(_player.Stats.Health <= 0) _player.SetState(new DeadState());
     }
 
-    public override void PerformAction()
+    public override void StateUpdate()
     {
-        if(_player.Stats.Energy <= 0) _player.SetState(new TiredState());
+        if(_player.Stats.Energy < 80) _player.SetState(new TiredState());
     }
 }

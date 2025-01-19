@@ -10,11 +10,12 @@ namespace Mob
     {
         [SerializeField] private MobDefinition definition;
         private IMob _mob;
+        public IMob Mob => _mob;
         private NavMeshAgent _agent;
         public NavMeshAgent NavAgent => _agent;
 
-        private Transform _player;
-        public Transform Player => _player;
+        private Player _player;
+        public Player Player => _player;
 
         public float DetectionRange = 10f;
         public float AttackRange = 2f;
@@ -40,7 +41,7 @@ namespace Mob
                 Debug.LogError($"NavMeshAgent component not found in GameObject {name}");
             }
 
-            _player = GameObject.FindGameObjectWithTag("Player").transform;
+            _player = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<Player>();
             ChangeState(MobState.Patrol);
             Animation = GetComponent<MobAnimation>();
         }
@@ -82,7 +83,7 @@ namespace Mob
         
         public void DetectPlayer()
         {
-            float distance = Vector3.Distance(transform.position, _player.position);
+            float distance = Vector3.Distance(transform.position, _player.transform.position);
             if (distance <= DetectionRange)
             {
                 if (_mob is AggressiveMob)

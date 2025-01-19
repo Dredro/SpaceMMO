@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using LocomotionSystem.Input;
 using UnityEngine;
 
@@ -10,6 +12,7 @@ namespace LocomotionSystem
         [Header("Components")]
         [SerializeField] private CharacterController _characterController;
         [SerializeField] private Camera _playerCamera;
+        private Player _player;
         public float RotationMismatch { get; private set; } = 0f;
         public bool IsRotatingToTarget { get; private set; } = false;
 
@@ -64,6 +67,8 @@ namespace LocomotionSystem
 
             _antiBump = sprintSpeed;
             _stepOffset = _characterController.stepOffset;
+            _player = GetComponent<Player>();
+            StartCoroutine(EnergyConsume());
         }
         #endregion
 
@@ -71,8 +76,6 @@ namespace LocomotionSystem
         private void Update()
         {
             UpdateMovementState();
-            print(_characterController.velocity);
-
             HandleVerticalMovement();
             HandleLateralMovement();
         }
@@ -162,7 +165,7 @@ namespace LocomotionSystem
 
             Vector3 movementDelta = movementDirection * lateralAcceleration * Time.deltaTime;
             Vector3 newVelocity = _characterController.velocity + movementDelta;
-
+            
             // Add drag to player
             float dragMagnitude = isGrounded ? drag : inAirDrag;
             Vector3 currentDrag = newVelocity.normalized * dragMagnitude * Time.deltaTime;
@@ -173,8 +176,19 @@ namespace LocomotionSystem
 
             // Move character (Unity suggests only calling this once per tick)
             _characterController.Move(newVelocity * Time.deltaTime);
+            
         }
 
+        private IEnumerator EnergyConsume()
+        {
+            while (true)    
+            {
+                if (_player.Stats.Energy >= 0 &&
+                    _playerState.CurrentPlayerMovementState == PlayerMovementState.Sprinting)
+                    _player.Stats.Energy --;
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
         private Vector3 HandleSteepWalls(Vector3 velocity)
         {
             Vector3 normal = CharacterControllerUtils.GetNormalWithSphereCast(_characterController, _groundLayers);
@@ -285,6 +299,7 @@ namespace LocomotionSystem
 
         private bool CanRun()
         {
+            if (!_player.CanRun()) return false;
             // This means player is moving diagonally at 45 degrees or forward, if so, we can run
             return _playerLocomotionInput.MovementInput.y >= Mathf.Abs(_playerLocomotionInput.MovementInput.x);
         }

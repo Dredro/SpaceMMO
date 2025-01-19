@@ -7,21 +7,16 @@ namespace Mob
     {
         public void Execute(MobController controller)
         {
-            float distance = Vector3.Distance(controller.transform.position, controller.Player.position);
+            float distance = Vector3.Distance(controller.transform.position, controller.Player.transform.position);
             if (distance > controller.AttackRange)
             {
-                controller.NavAgent.SetDestination(controller.Player.position);
+                controller.NavAgent.SetDestination(controller.Player.transform.position);
                 controller.Animation.PlayMovement();
             }
             else
             {
                 controller.Animation.PlayAttack();
-               // PlayerHealth playerHealth = controller.Player.GetComponent<PlayerHealth>();
-                /*if (playerHealth != null)
-                {
-                    playerHealth.TakeDamage(controller.AttackDamage);
-                    Debug.Log($"{controller.Mob.MobName} atakuje gracza!");
-                }*/
+                controller.Player.TakeDamage(controller.Mob.AttackDamage);
             }
             
             if (distance > controller.DetectionRange)

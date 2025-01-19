@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public Stats Stats;
     private PlayerState _currentState;
     private PlayerActionsInput _playerActionsInput;
-
+    private bool _canRun = true;
     private void Start()
     {
         try
@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         if(_playerActionsInput.AttackPressed) Attack();
+        StateUpdate();
     }
 
     private void Attack()
@@ -57,12 +58,13 @@ public class Player : MonoBehaviour
     {
         _currentState = state;
         _currentState.SetPlayer(this);
+        StateEnter();
         Debug.Log("Current state: "+ _currentState.GetType());
     }
 
-    public void Rest()
+    public void StateEnter()
     {
-        _currentState.Rest();
+        _currentState.StateEnter();
     }
 
     public void TakeDamage(int value)
@@ -70,8 +72,18 @@ public class Player : MonoBehaviour
         _currentState.TakeDamage(value);
     }
 
-    public void PerformAction()
+    public void StateUpdate()
     {
-        _currentState.PerformAction();
+        _currentState.StateUpdate();
+    }
+
+    public bool CanRun()
+    {
+        return _canRun;
+    }
+
+    public void SetCanRun(bool canRun)
+    {
+        _canRun = canRun;
     }
 }

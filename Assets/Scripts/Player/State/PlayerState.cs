@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public abstract class PlayerState
 {
     protected Player _player;
@@ -6,8 +8,8 @@ public abstract class PlayerState
         _player = player;
     }
     
-    public abstract void Rest();
+    public abstract void StateEnter();
     public abstract void TakeDamage(int value);
-    public abstract void PerformAction();
-    
+    public abstract void StateUpdate();
+  
 }
