@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using LocomotionSystem.Input;
 using Mob;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class Player : MonoBehaviour
     private PlayerState _currentState;
     private PlayerActionsInput _playerActionsInput;
     private bool _canRun = true;
+    private bool isAttacking = false;
     private void Start()
     {
         try
@@ -43,9 +45,20 @@ public class Player : MonoBehaviour
         if(_playerActionsInput.AttackPressed) Attack();
         StateUpdate();
     }
+    
 
     private void Attack()
     {
+        if (!isAttacking) 
+        {
+            StartCoroutine(AttackWithDelay());
+        }
+    }
+
+    private IEnumerator AttackWithDelay()
+    {
+        isAttacking = true;
+
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 2f))
         {
             if (hit.transform.TryGetComponent(out MobController mobController))
@@ -53,6 +66,9 @@ public class Player : MonoBehaviour
                 mobController.TakeDamage(Stats.Damage);
             }
         }
+
+        yield return new WaitForSeconds(1f); 
+        isAttacking = false;
     }
     public void SetState(PlayerState state)
     {
@@ -67,7 +83,7 @@ public class Player : MonoBehaviour
         _currentState.StateEnter();
     }
 
-    public void TakeDamage(int value)
+    public void TakeDamage(float value)
     {
         _currentState.TakeDamage(value);
     }

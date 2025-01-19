@@ -1998,8 +1998,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   definition: {fileID: 11400000, guid: c0f772d3c16de2848a5efe55219d2cb0, type: 2}
-  DetectionRange: 50
+  DetectionRange: 10
   AttackRange: 2
+  AttackDelay: 0.5
   Animation: {fileID: 0}
 --- !u!114 &1369460715809131984
 MonoBehaviour:

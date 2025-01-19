@@ -54,5 +54,6 @@ public class ArmorSlot : MonoBehaviour,IDropHandler
     public void SetArmorValue(int value)
     {
         armorValue.text = value.ToString();
+        StatsController.Instance.SetArmor(value);
     }
 }

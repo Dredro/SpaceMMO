@@ -9,7 +9,7 @@ public abstract class PlayerState
     }
     
     public abstract void StateEnter();
-    public abstract void TakeDamage(int value);
+    public abstract void TakeDamage(float value);
     public abstract void StateUpdate();
   
 }

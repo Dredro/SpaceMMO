@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 0
   itemName: Fire Stone
   weight: 10
-  value: 100
+  value: 1000
   type: 3
   gameObjectPrefab: {fileID: 6925621857116457265, guid: ab57f6eb25eeb684c83cc19e549e3843, type: 3}
   icon: {fileID: 555679549, guid: 38ca1786ce9675f4aab338894adf0243, type: 3}

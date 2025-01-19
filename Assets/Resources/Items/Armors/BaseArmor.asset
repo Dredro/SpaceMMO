@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 0
   itemName: BaseArmor
   weight: 100
-  value: 10
+  value: 100
   type: 1
   gameObjectPrefab: {fileID: 2524249493086841393, guid: 257151b7929cfaa4eb0faf9e55989c7a, type: 3}
   icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}

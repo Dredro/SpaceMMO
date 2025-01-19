@@ -1,3 +1,4 @@
+using Enhance;
 using UnityEngine;
 
 public class DeadState : PlayerState
@@ -5,21 +6,17 @@ public class DeadState : PlayerState
     public override void StateEnter()
     {
         if(_player.gameObject != null)
-            Object.Destroy(_player.gameObject);
+            GameManager.GameReset();
         Debug.Log("Player die");
     }
 
-    public override void TakeDamage(int value)
+    public override void TakeDamage(float value)
     { 
-        if(_player.gameObject != null)
-            Object.Destroy(_player.gameObject);
         Debug.Log("Player die");
     }
-
+    
     public override void StateUpdate()
     {
-        if(_player.gameObject != null)
-            Object.Destroy(_player.gameObject);
         Debug.Log("Player die");
     }
 }

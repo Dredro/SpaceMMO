@@ -8,11 +8,12 @@ using UnityEngine;
 public class Stats : ISubject
 {
     public string id;
-
+    
+    
     [SerializeField]
-    private int health;
+    private float health;
 
-    public int Health
+    public float Health
     {
         get => health;
         set
@@ -35,8 +36,8 @@ public class Stats : ISubject
         }
     }
 
-    public int Damage { get; set; } = 1;
-
+    public int Damage { get; set; } = 25;
+    public int Armor { get; set; } = 0;
 
     public List<IObserver> Observers { get; set; } = new();
     

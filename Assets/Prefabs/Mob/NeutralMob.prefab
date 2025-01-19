@@ -545,8 +545,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   definition: {fileID: 11400000, guid: 09562bc5e7536d949ae4235a78622a72, type: 2}
-  DetectionRange: 50
+  DetectionRange: 10
   AttackRange: 2
+  AttackDelay: 1
   Animation: {fileID: 0}
 --- !u!114 &3811593029220127049
 MonoBehaviour:

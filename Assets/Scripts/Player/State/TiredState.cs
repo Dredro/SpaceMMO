@@ -18,7 +18,7 @@ public class TiredState : PlayerState
         }
     }
 
-    public override void TakeDamage(int value)
+    public override void TakeDamage(float value)
     {
         _player.Stats.Health -= value;
         if (_player.Stats.Health <= 0)
