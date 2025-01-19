@@ -19,7 +19,7 @@ namespace Mob
 
         public float DetectionRange = 10f;
         public float AttackRange = 2f;
-
+        public float AttackDelay = 0.5f;
         private IBehaviourStrategy _currentStrategy;
         private MobState _currentState;
         public MobAnimation Animation;
@@ -83,6 +83,7 @@ namespace Mob
         
         public void DetectPlayer()
         {
+            if(!_player) return;
             float distance = Vector3.Distance(transform.position, _player.transform.position);
             if (distance <= DetectionRange)
             {
