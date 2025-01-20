@@ -1,87 +1,54 @@
-using System;
-using InventorySystem.Item;
-using ObserverPattern;
-using UnityEditor;
 using UnityEngine;
 
-public class StatsController
+namespace PlayerSystem
 {
-    private static StatsController _instance;
-    private Stats _stats = new Stats();
-    
-    public static StatsController Instance
+    public class StatsController
     {
-        get
+        private static StatsController _instance;
+        private Stats _stats = new Stats();
+
+        public static StatsController Instance
         {
-            if (_instance == null)
+            get
             {
-                _instance = new StatsController();
+                if (_instance == null)
+                {
+                    _instance = new StatsController();
+                }
+
+                return _instance;
             }
-            return _instance;
         }
-    }
-    public void AttachBasicObservers(Stats stats, UIHealth healthObserver, UIEnergy energyObserver)
-    {
-        if (healthObserver != null)
-        {
-            stats.AttachObserver(healthObserver);
-            stats.NotifyObservers(SubjectMessageConst.HealthUpdateMessage);
-        }
-        else Debug.LogWarning("UIHealth observer not found!");
 
-        if (energyObserver != null)
+        public void AttachBasicObservers(Stats stats, UIHealth healthObserver, UIEnergy energyObserver)
         {
-            stats.AttachObserver(energyObserver);
-            stats.NotifyObservers(SubjectMessageConst.EnergyUpdateMessage);
-        }
-        else Debug.LogWarning("UIEnergy observer not found!");
-    }
-    public Stats GetStats(string id)
-    {
-        return new Stats
-        {
-            Energy = 100,
-            Health = 100
-        };
-    }
+            if (healthObserver != null)
+            {
+                stats.AttachObserver(healthObserver);
+                stats.NotifyObservers(SubjectMessageConst.HealthUpdateMessage);
+            }
+            else Debug.LogWarning("UIHealth observer not found!");
 
-    public void SetArmor(int value)
-    {
-        _stats.Armor = value;
-    }
-    public void AddEnergy(Stats stats, int amount)
-    {
-        stats.Energy += amount;
-        if (stats.Energy > 100)
-        {
-            stats.Energy = 100; 
+            if (energyObserver != null)
+            {
+                stats.AttachObserver(energyObserver);
+                stats.NotifyObservers(SubjectMessageConst.EnergyUpdateMessage);
+            }
+            else Debug.LogWarning("UIEnergy observer not found!");
         }
-    }
 
-    public void RemoveEnergy(Stats stats, int amount)
-    {
-        stats.Energy -= amount;
-        if (stats.Energy < 0)
+        public Stats GetStats(string id)
         {
-            stats.Energy = 0;
+            return new Stats
+            {
+                Energy = 100,
+                Health = 100
+            };
         }
-    }
 
-    public void AddHealth(Stats stats, int amount)
-    {
-        stats.Health += amount;
-        if (stats.Health > 100)
+        public void SetArmor(int value)
         {
-            stats.Health = 100; 
-        }
-    }
-
-    public void RemoveHealth(Stats stats, int amount)
-    {
-        stats.Health -= amount;
-        if (stats.Health < 0)
-        {
-            stats.Health = 0; 
+            _stats.Armor = value;
         }
     }
 }

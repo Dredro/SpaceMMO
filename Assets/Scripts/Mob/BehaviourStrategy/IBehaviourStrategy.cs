@@ -1,4 +1,4 @@
-namespace Mob
+namespace MobSystem
 {
     public interface IBehaviourStrategy
     {

@@ -1,6 +1,6 @@
 using UnityEngine.SceneManagement;
 
-namespace Enhance
+namespace GameSystem
 {
     public static class GameManager
     {

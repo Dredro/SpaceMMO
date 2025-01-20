@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Mob
+namespace MobSystem
 {
     public class PatrolStrategy : IBehaviourStrategy
     {
@@ -9,7 +9,7 @@ namespace Mob
         {
             if (!controller.NavAgent.hasPath)
             {
-                Vector3 randomDirection = Random.insideUnitSphere * 20;
+                var randomDirection = Random.insideUnitSphere * 20;
                 randomDirection += controller.transform.position;
                 NavMeshHit hit;
                 if (NavMesh.SamplePosition(randomDirection, out hit, 20, 1))

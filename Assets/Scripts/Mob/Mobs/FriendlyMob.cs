@@ -1,6 +1,6 @@
 using System;
 
-namespace Mob
+namespace MobSystem
 {
     public class FriendlyMob : IMob
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Mob.Mobs
+namespace MobSystem
 {
     public class AggressiveMob : IMob
     {

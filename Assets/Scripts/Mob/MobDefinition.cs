@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Mob
+namespace MobSystem
 {
     public enum MobType
     {

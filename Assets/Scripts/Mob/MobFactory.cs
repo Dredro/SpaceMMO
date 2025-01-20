@@ -1,7 +1,5 @@
 using System;
-using Mob.Mobs;
-
-namespace Mob
+namespace MobSystem
 {
     public static class MobFactory
     {

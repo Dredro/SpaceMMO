@@ -1,9 +1,8 @@
-using Mob.Mobs;
+using PlayerSystem;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
-namespace Mob
+namespace MobSystem
 {
     [RequireComponent(typeof(MobAnimation))]
     public class MobController : MonoBehaviour

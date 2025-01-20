@@ -1,5 +1,3 @@
-using System;
-using InventorySystem.Item;
 using UnityEngine;
 
 namespace InventorySystem

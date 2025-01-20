@@ -1,6 +1,6 @@
 using System;
 
-namespace InventorySystem.Item
+namespace InventorySystem
 {
     public static class ItemFactory
     {

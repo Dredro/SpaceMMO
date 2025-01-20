@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace InventorySystem.UI
+namespace InventorySystem
 {
     public class DraggableItem : MonoBehaviour,IDragHandler, IBeginDragHandler, IEndDragHandler
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace InventorySystem.Item
+namespace InventorySystem
 {
     public class Armor : IItem
     {

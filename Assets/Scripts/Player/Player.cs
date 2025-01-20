@@ -1,105 +1,110 @@
 using System;
 using System.Collections;
 using LocomotionSystem.Input;
-using Mob;
+using MobSystem;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class Player : MonoBehaviour
+namespace PlayerSystem
 {
-    public string Id;
-    public Stats Stats;
-    private PlayerState _currentState;
-    private PlayerActionsInput _playerActionsInput;
-    private bool _canRun = true;
-    private bool isAttacking = false;
-    private void Start()
+    public class Player : MonoBehaviour
     {
-        try
+        public string id;
+        public Stats Stats;
+        private PlayerState _currentState;
+        private PlayerActionsInput _playerActionsInput;
+        private bool _canRun = true;
+        private bool _isAttacking = false;
+
+        private void Start()
         {
-            Stats = StatsController.Instance.GetStats("0");
-            if (Stats == null)
+            try
             {
-                throw new Exception("Stats loading failed!");
+                Stats = StatsController.Instance.GetStats("0");
+                if (Stats == null)
+                {
+                    throw new Exception("Stats loading failed!");
+                }
+
+                var healthUI = FindFirstObjectByType<UIHealth>();
+                var energyUI = FindFirstObjectByType<UIEnergy>();
+                if (healthUI == null || energyUI == null)
+                {
+                    throw new Exception("UI components not found!");
+                }
+
+                StatsController.Instance.AttachBasicObservers(Stats, healthUI, energyUI);
+                SetState(new AliveState());
+                _playerActionsInput = GetComponent<PlayerActionsInput>();
             }
-
-            var healthUI = FindFirstObjectByType<UIHealth>();
-            var energyUI = FindFirstObjectByType<UIEnergy>();
-            if (healthUI == null || energyUI == null)
+            catch (Exception ex)
             {
-                throw new Exception("UI components not found!");
-            }
-
-            StatsController.Instance.AttachBasicObservers(Stats, healthUI, energyUI);
-            SetState(new AliveState());
-            _playerActionsInput = GetComponent<PlayerActionsInput>();
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"An error occurred in Start: {ex.Message}");
-        }
-    }
-
-    private void Update()
-    {
-        if(_playerActionsInput.AttackPressed) Attack();
-        StateUpdate();
-    }
-    
-
-    private void Attack()
-    {
-        if (!isAttacking) 
-        {
-            StartCoroutine(AttackWithDelay());
-        }
-    }
-
-    private IEnumerator AttackWithDelay()
-    {
-        isAttacking = true;
-
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 2f))
-        {
-            if (hit.transform.TryGetComponent(out MobController mobController))
-            {
-                mobController.TakeDamage(Stats.Damage);
+                Debug.LogError($"An error occurred in Start: {ex.Message}");
             }
         }
 
-        yield return new WaitForSeconds(1f); 
-        isAttacking = false;
-    }
-    public void SetState(PlayerState state)
-    {
-        _currentState = state;
-        _currentState.SetPlayer(this);
-        StateEnter();
-        Debug.Log("Current state: "+ _currentState.GetType());
-    }
+        private void Update()
+        {
+            if (_playerActionsInput.AttackPressed) Attack();
+            StateUpdate();
+        }
 
-    public void StateEnter()
-    {
-        _currentState.StateEnter();
-    }
 
-    public void TakeDamage(float value)
-    {
-        _currentState.TakeDamage(value);
-    }
+        private void Attack()
+        {
+            if (!_isAttacking)
+            {
+                StartCoroutine(AttackWithDelay());
+            }
+        }
 
-    public void StateUpdate()
-    {
-        _currentState.StateUpdate();
-    }
+        private IEnumerator AttackWithDelay()
+        {
+            _isAttacking = true;
 
-    public bool CanRun()
-    {
-        return _canRun;
-    }
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit,
+                    2f))
+            {
+                if (hit.transform.TryGetComponent(out MobController mobController))
+                {
+                    mobController.TakeDamage(Stats.Damage);
+                }
+            }
 
-    public void SetCanRun(bool canRun)
-    {
-        _canRun = canRun;
+            yield return new WaitForSeconds(1f);
+            _isAttacking = false;
+        }
+
+        public void SetState(PlayerState state)
+        {
+            _currentState = state;
+            _currentState.SetPlayer(this);
+            StateEnter();
+            Debug.Log("Current state: " + _currentState.GetType());
+        }
+
+        private void StateEnter()
+        {
+            _currentState.StateEnter();
+        }
+
+        public void TakeDamage(float value)
+        {
+            _currentState.TakeDamage(value);
+        }
+
+        private void StateUpdate()
+        {
+            _currentState.StateUpdate();
+        }
+
+        public bool CanRun()
+        {
+            return _canRun;
+        }
+
+        public void SetCanRun(bool canRun)
+        {
+            _canRun = canRun;
+        }
     }
 }

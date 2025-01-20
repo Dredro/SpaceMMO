@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace InventorySystem.Item
+namespace InventorySystem
 {
     public class ItemManager : MonoBehaviour
     {

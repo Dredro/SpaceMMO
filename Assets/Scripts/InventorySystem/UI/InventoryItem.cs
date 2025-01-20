@@ -1,11 +1,8 @@
-using System;
-using InventorySystem.Item;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace InventorySystem.UI
+namespace InventorySystem
 {
     public class InventoryItem : MonoBehaviour
     {

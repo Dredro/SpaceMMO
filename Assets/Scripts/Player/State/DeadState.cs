@@ -1,22 +1,25 @@
-using Enhance;
+using GameSystem;
 using UnityEngine;
 
-public class DeadState : PlayerState
+namespace PlayerSystem
 {
-    public override void StateEnter()
+    public class DeadState : PlayerState
     {
-        if(_player.gameObject != null)
-            GameManager.GameReset();
-        Debug.Log("Player die");
-    }
+        public override void StateEnter()
+        {
+            if (_player.gameObject != null)
+                GameManager.GameReset();
+            Debug.Log("Player die");
+        }
 
-    public override void TakeDamage(float value)
-    { 
-        Debug.Log("Player die");
-    }
-    
-    public override void StateUpdate()
-    {
-        Debug.Log("Player die");
+        public override void TakeDamage(float value)
+        {
+            Debug.Log("Player die");
+        }
+
+        public override void StateUpdate()
+        {
+            Debug.Log("Player die");
+        }
     }
 }

@@ -1,6 +1,5 @@
 using System;
-
-namespace Mob
+namespace MobSystem
 {
     public interface IMob
     {

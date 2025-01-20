@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace InventorySystem.Item
+namespace InventorySystem
 {
     public class Weapon : IItem
     {   
@@ -21,8 +21,6 @@ namespace InventorySystem.Item
             Icon = definition.icon;
             Stackable = definition.stackable;
         }
-
-        public ItemDefinition Definition { get; set; }
         public void Use()
         {
             
