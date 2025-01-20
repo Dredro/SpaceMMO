@@ -1,9 +1,6 @@
-using InventorySystem;
-using InventorySystem.Item;
-using InventorySystem.UI;
 using UnityEngine;
 
-namespace Enhance
+namespace InventorySystem
 {
     public class Enhancer : MonoBehaviour
     {

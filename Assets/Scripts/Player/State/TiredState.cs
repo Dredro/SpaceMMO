@@ -1,17 +1,41 @@
-public class TiredState : PlayerState
+using System.Collections;
+using UnityEngine;
+
+namespace PlayerSystem
 {
-    public override void Rest()
+    public class TiredState : PlayerState
     {
-        if(_player.Stats.Energy > 0) _player.SetState(new AliveState());
-    }
+        public override void StateEnter()
+        {
+            _player.StartCoroutine(Rest());
+        }
 
-    public override void TakeDamage(int value)
-    {
-        _player.Stats.Health -= value;
-        if(_player.Stats.Health <= 0) _player.SetState(new DeadState());
-    }
+        private IEnumerator Rest()
+        {
+            while (_player.Stats.Energy < 100)
+            {
+                _player.Stats.Energy++;
+                yield return new WaitForSeconds(3f);
+            }
+        }
 
-    public override void PerformAction()
-    {
+        public override void TakeDamage(float value)
+        {
+            _player.Stats.Health -= value;
+            if (_player.Stats.Health <= 0)
+            {
+                _player.SetState(new DeadState());
+            }
+        }
+
+        public override void StateUpdate()
+        {
+            if (_player.Stats.Energy >= 100)
+            {
+                _player.SetState(new AliveState());
+            }
+
+            _player.SetCanRun(_player.Stats.Energy > 0);
+        }
     }
 }

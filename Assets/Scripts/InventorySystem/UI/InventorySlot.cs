@@ -1,9 +1,8 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace InventorySystem.UI
+namespace InventorySystem
 {
     public class InventorySlot : MonoBehaviour, IDropHandler
     {

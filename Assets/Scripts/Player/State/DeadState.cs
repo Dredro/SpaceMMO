@@ -1,22 +1,25 @@
+using GameSystem;
 using UnityEngine;
 
-public class DeadState : PlayerState
+namespace PlayerSystem
 {
-    public override void Rest()
+    public class DeadState : PlayerState
     {
-        Object.Destroy(_player.gameObject);
-        Debug.Log("Player die");
-    }
+        public override void StateEnter()
+        {
+            if (_player.gameObject != null)
+                GameManager.GameReset();
+            Debug.Log("Player die");
+        }
 
-    public override void TakeDamage(int value)
-    { 
-        Object.Destroy(_player.gameObject);
-        Debug.Log("Player die");
-    }
+        public override void TakeDamage(float value)
+        {
+            Debug.Log("Player die");
+        }
 
-    public override void PerformAction()
-    {
-        Object.Destroy(_player.gameObject);
-        Debug.Log("Player die");
+        public override void StateUpdate()
+        {
+            Debug.Log("Player die");
+        }
     }
 }

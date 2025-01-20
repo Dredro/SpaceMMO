@@ -1,7 +1,4 @@
-using Input;
-using InventorySystem.UI;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace InventorySystem
 {

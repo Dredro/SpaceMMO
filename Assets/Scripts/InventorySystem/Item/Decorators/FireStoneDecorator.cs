@@ -1,7 +1,4 @@
-using UnityEngine;
-using UnityEngine.UIElements;
-
-namespace InventorySystem.Item
+namespace InventorySystem
 {
     public class FireStoneDecorator : ItemDecorator
     {

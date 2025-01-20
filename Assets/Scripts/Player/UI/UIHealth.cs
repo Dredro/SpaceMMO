@@ -1,24 +1,26 @@
-using System;
-using ObserverPattern;
 using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(TextMeshProUGUI))]
-public class UIHealth : MonoBehaviour, IObserver
+namespace PlayerSystem
 {
-    private TextMeshProUGUI _textMeshProUGUI;
-    private void Awake()
+    [RequireComponent(typeof(TextMeshProUGUI))]
+    public class UIHealth : MonoBehaviour, IObserver
     {
-        _textMeshProUGUI = GetComponent<TextMeshProUGUI>();
-    }
+        private TextMeshProUGUI _textMeshProUGUI;
 
-    public void Notify(ISubject subject,string message)
-    {
-        Debug.Log($"Notify : {subject} {message}");
-        if(message != SubjectMessageConst.HealthUpdateMessage) return;
-        if (subject is Stats stats)
+        private void Awake()
         {
-            _textMeshProUGUI.text = stats.Health.ToString();
+            _textMeshProUGUI = GetComponent<TextMeshProUGUI>();
+        }
+
+        public void Notify(ISubject subject, string message)
+        {
+            Debug.Log($"Notify : {subject} {message}");
+            if (message != SubjectMessageConst.HealthUpdateMessage) return;
+            if (subject is Stats stats)
+            {
+                _textMeshProUGUI.text = stats.Health.ToString();
+            }
         }
     }
 }

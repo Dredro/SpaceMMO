@@ -1,13 +1,17 @@
-public abstract class PlayerState
+namespace PlayerSystem
 {
-    protected Player _player;
-    public void SetPlayer(Player player)
+    public abstract class PlayerState
     {
-        _player = player;
+        protected Player _player;
+
+        public void SetPlayer(Player player)
+        {
+            _player = player;
+        }
+
+        public abstract void StateEnter();
+        public abstract void TakeDamage(float value);
+        public abstract void StateUpdate();
+
     }
-    
-    public abstract void Rest();
-    public abstract void TakeDamage(int value);
-    public abstract void PerformAction();
-    
 }

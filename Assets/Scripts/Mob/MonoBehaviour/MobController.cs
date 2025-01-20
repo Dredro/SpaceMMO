@@ -1,24 +1,24 @@
-using Mob.Mobs;
+using PlayerSystem;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
-namespace Mob
+namespace MobSystem
 {
     [RequireComponent(typeof(MobAnimation))]
     public class MobController : MonoBehaviour
     {
         [SerializeField] private MobDefinition definition;
         private IMob _mob;
+        public IMob Mob => _mob;
         private NavMeshAgent _agent;
         public NavMeshAgent NavAgent => _agent;
 
-        private Transform _player;
-        public Transform Player => _player;
+        private Player _player;
+        public Player Player => _player;
 
         public float DetectionRange = 10f;
         public float AttackRange = 2f;
-
+        public float AttackDelay = 0.5f;
         private IBehaviourStrategy _currentStrategy;
         private MobState _currentState;
         public MobAnimation Animation;
@@ -40,7 +40,7 @@ namespace Mob
                 Debug.LogError($"NavMeshAgent component not found in GameObject {name}");
             }
 
-            _player = GameObject.FindGameObjectWithTag("Player").transform;
+            _player = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<Player>();
             ChangeState(MobState.Patrol);
             Animation = GetComponent<MobAnimation>();
         }
@@ -82,7 +82,8 @@ namespace Mob
         
         public void DetectPlayer()
         {
-            float distance = Vector3.Distance(transform.position, _player.position);
+            if(!_player) return;
+            float distance = Vector3.Distance(transform.position, _player.transform.position);
             if (distance <= DetectionRange)
             {
                 if (_mob is AggressiveMob)

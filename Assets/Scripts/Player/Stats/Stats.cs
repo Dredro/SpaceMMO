@@ -1,61 +1,58 @@
-using System;
 using System.Collections.Generic;
-using ObserverPattern;
-using UnityEditor;
 using UnityEngine;
 
-[Serializable]
-public class Stats : ISubject
+namespace PlayerSystem
 {
-    public string id;
-
-    [SerializeField]
-    private int health;
-
-    public int Health
+    public class Stats : ISubject
     {
-        get => health;
-        set
+        public string ID;
+
+        private float _health;
+
+        public float Health
         {
-            health = value;
-            NotifyObservers(SubjectMessageConst.HealthUpdateMessage);
+            get => _health;
+            set
+            {
+                _health = value;
+                NotifyObservers(SubjectMessageConst.HealthUpdateMessage);
+            }
         }
-    }
 
-    [SerializeField]
-    private int energy;
+        [SerializeField] private int _energy;
 
-    public int Energy
-    {
-        get => energy;
-        set
+        public int Energy
         {
-            energy = value;
-            NotifyObservers(SubjectMessageConst.EnergyUpdateMessage);
+            get => _energy;
+            set
+            {
+                _energy = value;
+                NotifyObservers(SubjectMessageConst.EnergyUpdateMessage);
+            }
         }
-    }
 
-    public int Damage { get; set; } = 1;
+        public int Damage { get; set; } = 25;
+        public int Armor { get; set; } = 0;
 
+        public List<IObserver> Observers { get; set; } = new();
 
-    public List<IObserver> Observers { get; set; } = new();
-    
-    public void AttachObserver(IObserver observer)
-    {
-        if (Observers.Contains(observer)) return;
-        Observers.Add(observer);
-        Debug.Log($"Observer attached{observer}");
-    }
+        public void AttachObserver(IObserver observer)
+        {
+            if (Observers.Contains(observer)) return;
+            Observers.Add(observer);
+            Debug.Log($"Observer attached{observer}");
+        }
 
-    public void DetachObserver(IObserver observer)
-    {
-        if (!Observers.Contains(observer)) return;
-        Observers.Remove(observer);
-        Debug.Log($"Observer detached{observer}");
-    }
+        public void DetachObserver(IObserver observer)
+        {
+            if (!Observers.Contains(observer)) return;
+            Observers.Remove(observer);
+            Debug.Log($"Observer detached{observer}");
+        }
 
-    public void NotifyObservers(string message)
-    {
-        foreach (var observer in Observers) observer.Notify(this,message);
+        public void NotifyObservers(string message)
+        {
+            foreach (var observer in Observers) observer.Notify(this, message);
+        }
     }
 }
