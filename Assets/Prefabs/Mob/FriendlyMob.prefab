@@ -2014,7 +2014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274c48efb72e4ca693b871c96b26e7c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 4278305586974186630}
+  animator: {fileID: 4278305586974186630}
 --- !u!136 &5133096628090649750
 CapsuleCollider:
   m_ObjectHideFlags: 0

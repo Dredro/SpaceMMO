@@ -19,17 +19,17 @@ namespace InventorySystem
             }
         }
 
-        public bool DecorateItem(ItemController itemToDecorate, ItemController itemDecorator)
+        /*public bool DecorateItem(ItemController itemToDecorate, ItemController itemDecorator)
         {
             if(itemToDecorate == itemDecorator) return false;
             if (itemDecorator.Item is ItemDecorator decorator)
             {
                 decorator.Decorate(itemToDecorate.Item);
-                Destroy(itemToDecorate.gameObject);
+               // Destroy(itemToDecorate.gameObject);
                 return true;
             }
 
             return false;
-        }
+        }*/
     }
 }

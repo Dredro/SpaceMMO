@@ -4,7 +4,7 @@ namespace InventorySystem
 {
     public enum ItemType
     {
-        Weapon,Armor,Tool,FireStoneDecorator
+        Weapon,Armor,Tool,FireStoneDecorator,Coal
     }
     [CreateAssetMenu(fileName = "Item")]
     public class ItemDefinition : ScriptableObject

@@ -23,26 +23,33 @@ namespace InventorySystem
             Stackable = definition.stackable;
         }
 
-        public virtual void Decorate(IItem item)
+        public virtual bool Decorate(IItem item)
         {
             if (ReferenceEquals(this, item))
             {
                 Debug.LogWarning("Cannot decorate self");
-                return;
+                return false;
             }
-            if (wrappedItem is ItemDecorator decorator)
+            if (wrappedItem is null)
             {
-                decorator.Decorate(item);
+                wrappedItem = item;
+                Value += wrappedItem.Value;
+                ItemName += "+" + wrappedItem.ItemName;
+                return true;
             }
             else
             {
-                wrappedItem = item;
+                Debug.LogWarning("Cannot decorate decorator");
+                return false;
             }
         }
+
         public virtual void Use()
         {
             Debug.Log($"Using {ItemName} decorator, value: {Value}!");
             wrappedItem?.Use();
         }
+
+        
     }
 }

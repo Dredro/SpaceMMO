@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d8ca9b7bee447c0956fb127b45f088c, type: 3}
+  m_Name: Traurl Armor
+  m_EditorClassIdentifier: 
+  id: 1
+  itemName: Traurl Armor
+  weight: 50
+  value: 500
+  type: 1
+  gameObjectPrefab: {fileID: 0}
+  icon: {fileID: 21300000, guid: d06c1964df2ea3f40b3e57e0917d4052, type: 3}
+  stackable: 0

@@ -40,13 +40,13 @@ namespace InventorySystem
                 return;
             }
 
-            if (ItemManager.Instance.DecorateItem(itemToEnhance, decorator))
-            {
-                Destroy(itemToEnhanceSlot.GetComponentInChildren<InventoryItem>().gameObject);
-                Destroy(decoratorSlot.GetComponentInChildren<InventoryItem>().gameObject);
-                InventoryManager.instance.AddItem(decorator);
-            }
-          
+            if (decorator.Item is not ItemDecorator itemDecorator) return;
+            if (!itemDecorator.Decorate(itemToEnhance.Item)) return;
+            Destroy(itemToEnhanceSlot.GetComponentInChildren<InventoryItem>().gameObject);
+            Destroy(decoratorSlot.GetComponentInChildren<InventoryItem>().gameObject);
+            InventoryManager.instance.AddItem(decorator);
+            
+
         }
 
     }

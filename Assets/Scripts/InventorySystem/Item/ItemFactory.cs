@@ -12,6 +12,7 @@ namespace InventorySystem
                 ItemType.FireStoneDecorator => new FireStoneDecorator(definition),
                 ItemType.Weapon => new Weapon(definition),
                 ItemType.Tool => new Tool(definition),
+                ItemType.Coal => new CoalDecorator(definition),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }

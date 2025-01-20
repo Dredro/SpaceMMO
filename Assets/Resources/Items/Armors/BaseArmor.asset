@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: BaseArmor
   m_EditorClassIdentifier: 
   id: 0
-  itemName: BaseArmor
+  itemName: Exploration Armor
   weight: 100
   value: 100
   type: 1
   gameObjectPrefab: {fileID: 2524249493086841393, guid: 257151b7929cfaa4eb0faf9e55989c7a, type: 3}
-  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: 21300000, guid: b79b8acf7b29417429ec1000245a6d30, type: 3}
   stackable: 0

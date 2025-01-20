@@ -1,4 +1,5 @@
 using System;
+using LocomotionSystem.Input;
 using UnityEngine;
 
 namespace GameSystem
@@ -9,13 +10,14 @@ namespace GameSystem
       [SerializeField] private GameObject inventory;
 
       [SerializeField] private GameObject playerDeck;
-
-
+      [SerializeField] private PlayerLocomotionInput _playerLocomotionInput;
+      [SerializeField] private PlayerActionsInput _actionsInput;
+      [SerializeField] private Animator _animator;
       private bool _isActive;
 
       private void Update()
       {
-         if (UnityEngine.Input.GetKeyDown(KeyCode.I)) OnInventoryShow(!_isActive);
+         if (UnityEngine.Input.GetKeyDown(KeyCode.E)) OnInventoryShow(!_isActive);
       }
 
       private void Awake()
@@ -29,6 +31,14 @@ namespace GameSystem
       {
          _isActive = active;
          inventory.SetActive(active);
+         _playerLocomotionInput.enabled = !active;
+         _actionsInput.enabled = !active;
+         Invoke(nameof(ActiveAnim),.9f);
+      }
+
+      private void ActiveAnim()
+      {
+         _animator.enabled = !_isActive;
       }
    }
 }

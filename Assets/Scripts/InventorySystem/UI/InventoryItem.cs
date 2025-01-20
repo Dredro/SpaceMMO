@@ -21,20 +21,18 @@ namespace InventorySystem
             this.itemController = itemController;
     
             var currentItem = this.itemController.Item;
-    
+            itemName.text = currentItem.ItemName;
             if (currentItem is ItemDecorator itemDecorator && itemDecorator.wrappedItem != null)
             {
                 decoratorIcon.gameObject.SetActive(true);
                 icon.sprite = itemDecorator.wrappedItem.Icon;
                 decoratorIcon.sprite = itemDecorator.Icon;
-                itemName.text = itemDecorator.wrappedItem.ItemName;
                 stackable = itemDecorator.wrappedItem.Stackable;
             }
             else
             {
                 decoratorIcon.gameObject.SetActive(false);
                 icon.sprite = currentItem.Icon;
-                itemName.text = currentItem.ItemName;
                 stackable = currentItem.Stackable;
             }
 

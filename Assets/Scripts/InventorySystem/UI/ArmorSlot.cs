@@ -14,17 +14,13 @@ namespace InventorySystem
 
         private void Awake()
         {
-            switch (_armor)
+            if (_armor == null)
             {
-                case null:
-                    SetArmorValue(0);
-                    break;
-                case Armor:
-                    SetArmorValue(_armor.Value);
-                    break;
-                case ItemDecorator itemDecorator:
-                    SetArmorValue(_armor.Value + itemDecorator.Value);
-                    break;
+                SetArmorValue(0);
+            }
+            else
+            {
+                SetArmorValue(_armor.Value);
             }
         }
 
@@ -35,20 +31,9 @@ namespace InventorySystem
             if (eventData.pointerDrag.TryGetComponent(out DraggableItem draggableItem) &&
                 eventData.pointerDrag.TryGetComponent(out InventoryItem item))
             {
-                var itemInterface = item.itemController.Item;
-
-                if (itemInterface is Armor armor)
-                {
-                    SetArmorValue(armor.Value);
-                    draggableItem.parentAfterDrag = transform;
-                    _armor = armor;
-                }
-                else if (itemInterface is ItemDecorator { wrappedItem: Armor decoratedArmor } decorator)
-                {
-                    SetArmorValue(decoratedArmor.Value + decorator.Value);
-                    draggableItem.parentAfterDrag = transform;
-                    _armor = decorator;
-                }
+                _armor = item.itemController.Item;
+                SetArmorValue(_armor.Value);
+                draggableItem.parentAfterDrag = transform;
             }
         }
 

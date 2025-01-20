@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using LocomotionSystem.Input;
 using PlayerSystem;
@@ -69,8 +68,14 @@ namespace LocomotionSystem
             _antiBump = sprintSpeed;
             _stepOffset = _characterController.stepOffset;
             _player = GetComponent<Player>();
+            
+        }
+
+        private void Start()
+        {
             StartCoroutine(EnergyConsume());
         }
+
         #endregion
 
         #region Update Logic
@@ -80,6 +85,20 @@ namespace LocomotionSystem
             HandleVerticalMovement();
             HandleLateralMovement();
         }
+        private IEnumerator EnergyConsume()
+        {
+            while (true)
+            {
+                if (_player?.Stats != null && 
+                    _player.Stats.Energy >= 0 &&
+                    _playerState?.CurrentPlayerMovementState == PlayerMovementState.Sprinting)
+                {
+                    _player.Stats.Energy--;
+                }
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+
 
         private void UpdateMovementState()
         {
@@ -179,17 +198,7 @@ namespace LocomotionSystem
             _characterController.Move(newVelocity * Time.deltaTime);
             
         }
-
-        private IEnumerator EnergyConsume()
-        {
-            while (true)    
-            {
-                if (_player.Stats.Energy >= 0 &&
-                    _playerState.CurrentPlayerMovementState == PlayerMovementState.Sprinting)
-                    _player.Stats.Energy --;
-                yield return new WaitForSeconds(0.1f);
-            }
-        }
+        
         private Vector3 HandleSteepWalls(Vector3 velocity)
         {
             Vector3 normal = CharacterControllerUtils.GetNormalWithSphereCast(_characterController, _groundLayers);

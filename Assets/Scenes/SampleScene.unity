@@ -19,7 +19,7 @@ RenderSettings:
   m_FogMode: 1
   m_FogDensity: 0.16
   m_LinearFogStart: 0
-  m_LinearFogEnd: 19.6
+  m_LinearFogEnd: 39.93
   m_AmbientSkyColor: {r: 1.1486983, g: 1.1486983, b: 1.1486983, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
@@ -245,6 +245,33 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 98c7220cc11f59744b057a0f5606e24e, type: 2}
   m_BuildHeightMesh: 0
+--- !u!114 &139797365 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8224365636893473201, guid: 6d790eda9e818c94abbc97849aa2a314, type: 3}
+  m_PrefabInstance: {fileID: 2078475107642748063}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 789ec14285654193ae98616e08935cf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &139797366 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2539486278834440726, guid: 6d790eda9e818c94abbc97849aa2a314, type: 3}
+  m_PrefabInstance: {fileID: 2078475107642748063}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5196fae5d25442f296f0f8d757dea284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &139797372 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2635870202874706260, guid: 6d790eda9e818c94abbc97849aa2a314, type: 3}
+  m_PrefabInstance: {fileID: 2078475107642748063}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &251002149 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4242753337419625400, guid: b9b4a1f373cbb304bac42d1ae47a84b4, type: 3}
@@ -576,6 +603,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 472169683}
   playerDeck: {fileID: 7397891071401363857}
+  _playerLocomotionInput: {fileID: 139797366}
+  _actionsInput: {fileID: 139797365}
+  _animator: {fileID: 139797372}
 --- !u!1001 &549242492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -875,7 +905,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2639577612932453651, guid: 4542a344d22d55e46a85acfd4b34a936, type: 3}
       propertyPath: startItems.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2639577612932453651, guid: 4542a344d22d55e46a85acfd4b34a936, type: 3}
       propertyPath: 'startItems.Array.data[0]'
@@ -885,6 +915,14 @@ PrefabInstance:
       propertyPath: 'startItems.Array.data[1]'
       value: 
       objectReference: {fileID: 1023753772847421527, guid: ab57f6eb25eeb684c83cc19e549e3843, type: 3}
+    - target: {fileID: 2639577612932453651, guid: 4542a344d22d55e46a85acfd4b34a936, type: 3}
+      propertyPath: 'startItems.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1023753772847421527, guid: fcc073817aa173b4c86bd27e36122a33, type: 3}
+    - target: {fileID: 2639577612932453651, guid: 4542a344d22d55e46a85acfd4b34a936, type: 3}
+      propertyPath: 'startItems.Array.data[3]'
+      value: 
+      objectReference: {fileID: 7845843258702266448, guid: 4ff091a854e79ad4d856fd6afb795444, type: 3}
     - target: {fileID: 2639577612932453651, guid: 4542a344d22d55e46a85acfd4b34a936, type: 3}
       propertyPath: 'inventorySlots.Array.data[0]'
       value: 
@@ -2110,7 +2148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1951893288
 Transform:
   m_ObjectHideFlags: 0
@@ -2965,6 +3003,7 @@ PrefabInstance:
     - {fileID: 54587040284009847, guid: 6d790eda9e818c94abbc97849aa2a314, type: 3}
     - {fileID: 5165947322986417000, guid: 6d790eda9e818c94abbc97849aa2a314, type: 3}
     - {fileID: 5020567726370602924, guid: 6d790eda9e818c94abbc97849aa2a314, type: 3}
+    - {fileID: 6403236323920987494, guid: 6d790eda9e818c94abbc97849aa2a314, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -3010,11 +3049,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4295215558707041370, guid: b9b4a1f373cbb304bac42d1ae47a84b4, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 600
+      value: 596.98
       objectReference: {fileID: 0}
     - target: {fileID: 4295215558707041370, guid: b9b4a1f373cbb304bac42d1ae47a84b4, type: 3}
       propertyPath: m_SizeDelta.y
       value: 141.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 4295215558707041370, guid: b9b4a1f373cbb304bac42d1ae47a84b4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4295215558707041370, guid: b9b4a1f373cbb304bac42d1ae47a84b4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4295215558707041370, guid: b9b4a1f373cbb304bac42d1ae47a84b4, type: 3}
       propertyPath: m_LocalPosition.x
