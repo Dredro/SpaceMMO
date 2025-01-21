@@ -606,6 +606,7 @@ MonoBehaviour:
   _playerLocomotionInput: {fileID: 139797366}
   _actionsInput: {fileID: 139797365}
   _animator: {fileID: 139797372}
+  _gameObject: {fileID: 1951893287}
 --- !u!1001 &549242492
 PrefabInstance:
   m_ObjectHideFlags: 0

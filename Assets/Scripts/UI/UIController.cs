@@ -13,11 +13,13 @@ namespace GameSystem
       [SerializeField] private PlayerLocomotionInput _playerLocomotionInput;
       [SerializeField] private PlayerActionsInput _actionsInput;
       [SerializeField] private Animator _animator;
+      [SerializeField] private GameObject _gameObject;
       private bool _isActive;
 
       private void Update()
       {
          if (UnityEngine.Input.GetKeyDown(KeyCode.E)) OnInventoryShow(!_isActive);
+         if(UnityEngine.Input.GetKeyDown(KeyCode.Delete)) _gameObject.SetActive(!_gameObject.activeSelf);
       }
 
       private void Awake()
